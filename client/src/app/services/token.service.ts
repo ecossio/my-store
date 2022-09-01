@@ -1,3 +1,4 @@
+import { HttpXsrfTokenExtractor } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 
@@ -8,7 +9,7 @@ export const LS_DATA_KEY = 'mystore_auth_data';
   providedIn: 'root',
 })
 export class TokenService {
-  constructor(private lsSrv: LocalStorageService) {}
+  constructor(private lsSrv: LocalStorageService, private tokenExtractor: HttpXsrfTokenExtractor) {}
 
   saveToken(token: string) {
     const lsData = {
@@ -29,6 +30,10 @@ export class TokenService {
     }
 
     return token;
+  }
+
+  getXSRFToken() {
+    return this.tokenExtractor.getToken() as string;;
   }
 
   remove() {

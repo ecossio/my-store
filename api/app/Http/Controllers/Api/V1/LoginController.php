@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -16,23 +16,22 @@ class LoginController extends Controller
             return response()->json([
                 'access_token' => $request->user()->createToken($request->email)->plainTextToken,
                 'message' => 'success'
-            ]);
+            ], Response::HTTP_OK);
         }
 
         return response()->json([
-            'message' => 'Unauthorized'
+            'message' => 'Credenciales incorrectas'
         ], Response::HTTP_UNAUTHORIZED);
     }
 
     public function logout(Request $request)
     {
-        $user = $request->user();
+        $user = $request->user;
         if ($user) {
-            $tokenId = explode('|', $request->bearerToken())[0];
-            $user->tokens()->where('id', $tokenId)->delete();
+            $user->currentAccessToken()->delete();
         }
 
-        return response()->json([], 204);
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
     public function validateLogin(Request $request)
@@ -40,7 +39,6 @@ class LoginController extends Controller
         return $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            // 'name' => 'required'
         ]);
     }
 }

@@ -35,10 +35,15 @@ export class AuthService {
   login(credentials: Credentials) {
     return this.getCSRFCookie().pipe(
       switchMap(() =>
-        this.http.post<Auth>(`${this.apiUrl}/login`, credentials)
+        this.http.post<Auth>(
+          `${environment.API_URL}/sanctum/login`,
+          credentials
+        )
       ),
       tap((response) => {
-        this.tokenSrv.saveToken(response.access_token);
+        if (response && response.hasOwnProperty('access_token')) {
+          this.tokenSrv.saveToken(response.access_token);
+        }
       }),
       catchError((error: HttpErrorResponse) => {
         let message: string = '';
@@ -47,7 +52,7 @@ export class AuthService {
             message = 'Error interno del servidor';
             break;
           case HttpStatusCode.Unauthorized:
-            message = 'No estás autenticado';
+            message = 'Credenciales incorrectas';
             break;
           default:
             message = 'Ocurrio un error';
@@ -85,7 +90,7 @@ export class AuthService {
 
   getProfile(): Observable<User> {
     let myObservable = new Observable<User>();
-    const lsData = this.lsSrv.getJsonValue(LS_DATA_KEY);
+    let lsData = this.lsSrv.getJsonValue(LS_DATA_KEY);
 
     if (this.lsSrv.existsAndHasProperty(LS_DATA_KEY, 'user')) {
       console.log('NO hizo request', lsData);
@@ -97,15 +102,24 @@ export class AuthService {
       console.log('Hizo request', lsData);
       myObservable = this.http.get<User>(`${this.apiUrl}/me`).pipe(
         tap((user) => {
-          lsData.user = user;
+          if (lsData) {
+            lsData.user = user;
+          } else {
+            lsData = { user };
+          }
+
           this.lsSrv.setJsonValue(LS_DATA_KEY, lsData);
           this.user.next(user);
         }),
-        catchError((error: HttpErrorResponse) => {
-          if (error.status == 401) {
+        catchError((e: HttpErrorResponse) => {
+          let message: string = '';
+          if (e.status == 401 || e.status == 419) {
+            message = 'No estás autenticado';
             this.tokenSrv.remove();
+          } else {
+            message = e.error.message;
           }
-          return throwError(() => error);
+          return throwError(() => message);
         })
       );
     }
@@ -137,7 +151,7 @@ export class AuthService {
 
   logout() {
     this.http
-      .post(`${this.apiUrl}/logout`, {})
+      .post(`${environment.API_URL}/sanctum/logout`, {})
       .pipe(
         tap(() => {
           this.tokenSrv.remove();

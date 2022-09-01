@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     this.form = this.formBuilder.group({
       email: [
-        'beatty.rossie@example.com',
+        '',
         [
           Validators.compose([
             Validators.required,
@@ -45,12 +45,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           ]),
         ],
       ],
-      password: ['password', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.form.get('email')?.setValue('beatty.rossie@example.com');
+    this.form.get('email')?.setValue('mkirlin@example.net');
     this.form.get('password')?.setValue('password');
   }
 

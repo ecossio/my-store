@@ -4,7 +4,6 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpXsrfTokenExtractor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from '../services/token.service';
@@ -12,8 +11,7 @@ import { TokenService } from '../services/token.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    private tokenSrv: TokenService,
-    private tokenExtractor: HttpXsrfTokenExtractor
+    private tokenSrv: TokenService
   ) {}
 
   intercept(
@@ -25,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private addHeaders(request: HttpRequest<unknown>) {
-    const csrfToken = this.tokenExtractor.getToken() as string;
+    const xsrfToken = this.tokenSrv.getXSRFToken();
     const token = this.tokenSrv.getToken();
 
     let req = request.clone({
@@ -33,12 +31,12 @@ export class TokenInterceptor implements HttpInterceptor {
       headers: request.headers.set('Accept', 'application/json'),
     });
 
-    if (token || csrfToken) {
+    if (token || xsrfToken) {
       // Añadir cabecero para token CSRF que ofrece Sanctum
       const cookieheaderName = 'X-XSRF-TOKEN';
-      if (csrfToken !== null && !request.headers.has(cookieheaderName)) {
+      if (xsrfToken !== null && !request.headers.has(cookieheaderName)) {
         req = req.clone({
-          headers: req.headers.set(cookieheaderName, csrfToken),
+          headers: req.headers.set(cookieheaderName, xsrfToken),
         });
       }
 

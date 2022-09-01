@@ -31,7 +31,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const token = this.tokenSrv.getToken();
+    // const token = this.tokenSrv.getToken();
+    const token = this.tokenSrv.getXSRFToken();
     if (token) {
       this.authSrv.getProfile().subscribe();
     }
