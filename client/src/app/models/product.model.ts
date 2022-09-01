@@ -6,21 +6,21 @@ export interface Rating {
 export interface Category {
   id: number;
   name: string;
-  typeImg: string;
+  description: string;
 }
 
 export interface Product {
   id: number;
-  title: string;
+  name: string;
   description: string;
-  category: Category;
+  categories: Category[];
   price: number;
   images: string[];
   rating: Rating;
 }
 
 export interface CreateProductDTO
-  extends Omit<Product, 'id' | 'category' | 'rating'> {
+  extends Omit<Product, 'id' | 'categories' | 'rating'> {
   categoryId: number;
 }
 

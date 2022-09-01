@@ -6,6 +6,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile-menu',
@@ -36,7 +37,7 @@ import {
 })
 export class ProfileMenuComponent {
   userMenuActive: boolean = false;
-  constructor() {}
+  constructor(private authSrv: AuthService) {}
 
   toggleUserMenu() {
     this.userMenuActive = !this.userMenuActive;
@@ -46,5 +47,9 @@ export class ProfileMenuComponent {
     if (this.userMenuActive) {
       this.userMenuActive = false;
     }
+  }
+
+  SignOut(): void {
+    this.authSrv.logout();
   }
 }

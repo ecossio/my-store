@@ -36,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
         })
       )
       .subscribe((data) => {
-        this.product = data;
+        this.product = data ? data.data : null;
       });
   }
 

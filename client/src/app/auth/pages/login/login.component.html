@@ -1,0 +1,98 @@
+<section>
+  <div class="page-container">
+    <a href="#" class="app-name">
+      <img
+        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+        alt="Workflow"
+      />
+      MyStore
+    </a>
+    <div class="form-container">
+      <div class="content">
+        <h1 class="title">Sign in to your account</h1>
+        <form
+          id="frmSignIn"
+          [formGroup]="form"
+          #signInForm="ngForm"
+          (ngSubmit)="login()"
+        >
+          <div class="form-input">
+            <label for="email">Your email</label>
+            <input
+              #emailLoginInput
+              type="email"
+              name="email"
+              id="email"
+              formControlName="email"
+              autocomplete="off"
+              placeholder="name@company.com"
+              required=""
+            />
+            <!-- <div
+              class="text-red-700 font-light mt-1"
+              *ngIf="signInForm.submitted"
+            >
+              Formato de email incorrecto
+            </div> -->
+          </div>
+          <div class="form-input">
+            <label for="password">Password</label>
+            <input
+              #passwordLoginInput
+              type="password"
+              name="password"
+              formControlName="password"
+              id="password"
+              autocomplete="off"
+              placeholder="••••••••"
+              required=""
+            />
+          </div>
+          <div class="flex items-center justify-end">
+            <a
+              routerLink="../recovery"
+              class="text-sm font-medium text-primary-600 hover:underline text-white"
+              >Forgot password?</a
+            >
+          </div>
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="btnSubmitOpts.loading"
+          >
+            <svg
+              *ngIf="btnSubmitOpts.loading"
+              class="loader"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            {{ btnSubmitOpts.text }}
+          </button>
+          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+            Don’t have an account yet?
+            <a
+              routerLink="../register"
+              class="font-medium text-white hover:underline dark:text-white"
+              >Sign up</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

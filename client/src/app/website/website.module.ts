@@ -9,9 +9,6 @@ import { ProfileMenuComponent } from './components/profile-menu/profile-menu.com
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MyCartComponent } from './pages/my-cart/my-cart.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -23,9 +20,6 @@ import { LayoutComponent } from './components/layout/layout.component';
     SideMenuComponent,    
     HomeComponent,
     MyCartComponent,
-    LoginComponent,
-    RegisterComponent,
-    RecoveryComponent,
     ProfileComponent,
     ProductDetailComponent,
     LayoutComponent,

@@ -12,13 +12,9 @@ export class ProductComponent {
 
   @Input() product: Product = {
     id: 0,
-    title: '',
+    name: '',
     description: '',
-    category: {
-      id: 0,
-      name: '',
-      typeImg: '',
-    },
+    categories: [],
     price: 0,
     images: [],
     rating: { rate: 0, count: 0 },

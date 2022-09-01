@@ -9,6 +9,8 @@ import {
 } from '@angular/animations';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/product.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -38,13 +40,15 @@ import { Category } from '../../../models/product.model';
   ],
 })
 export class NavbarComponent implements OnInit {
+  user: User | null = null;
   categories: Category[] = [];
   mobileMenuActive: boolean = false;
   counter = 0;
 
   constructor(
     private storeService: StoreService,
-    private categorySrv: CategoryService
+    private categorySrv: CategoryService,
+    private authSrv: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -52,8 +56,14 @@ export class NavbarComponent implements OnInit {
       this.counter = products.length;
     });
 
-    this.categorySrv.getAll().subscribe((data) => {
-      this.categories = data;
+    this.authSrv.user$.subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+    });
+
+    this.categorySrv.getAll().subscribe((categories) => {
+      this.categories = categories.data;
     });
   }
 

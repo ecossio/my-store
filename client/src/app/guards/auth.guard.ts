@@ -28,18 +28,16 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+      /*
     const token = this.tokenSrv.getToken();
     if (!token) {
       this.router.navigate(['/home']);
       return false;
     }
 
-    return true;
-
-    /*
+    return true;*/
     return this.authSrv.user$.pipe(
       map((user) => {
-        console.log('auth.guard', user);
         if (!user) {
           this.router.navigate(['/home']);
           return false;
@@ -47,6 +45,6 @@ export class AuthGuard implements CanActivate {
 
         return true;
       })
-    );*/
+    );
   }
 }

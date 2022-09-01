@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./cms/cms.module').then((m) => m.CmsModule),
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   },

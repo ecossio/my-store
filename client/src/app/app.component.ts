@@ -1,7 +1,9 @@
+import { HttpXsrfTokenExtractor } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Credentials, User } from './models/user.model';
 import { AuthService } from './services/auth.service';
 import { FilesService } from './services/files.service';
+import { SnackbarService } from './services/snackbar.service';
 import { TokenService } from './services/token.service';
 import { UserService } from './services/user.service';
 
@@ -54,8 +56,8 @@ export class AppComponent implements OnInit {
 
   login() {
     const credentials: Credentials = {
-      email: 'maria@mail.com',
-      password: '12345',
+      email: 'beatty.rossie@example.com',
+      password: 'password',
     };
     this.authSrv.loginAndGet(credentials).subscribe((user) => {
       this.profile = user;

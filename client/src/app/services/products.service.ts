@@ -14,6 +14,7 @@ import {
 import { environment } from './../../environments/environment';
 import { throwError, zip } from 'rxjs';
 import { checkTime } from '../interceptors/time.interceptor';
+import { ApiResponse } from '../models/api-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -58,8 +59,9 @@ export class ProductsService {
      * Podemos habilitar o deshabilitar un interceptor de acuerdo a un contexto (context),
      * de esta forma podemos decidir especificamente a que peticiones se aplica el interceptor
      */
+
     return this.http
-      .get<Product[]>(`${this.apiUrl}/products`, {
+      .get<ApiResponse<Product[]>>(`${this.apiUrl}/products`, {
         params,
         context: checkTime(),
       })
@@ -72,7 +74,7 @@ export class ProductsService {
   }
 
   getProduct(id: number) {
-    return this.http.get<Product>(`${this.apiUrl}/products/${id}`).pipe(
+    return this.http.get<ApiResponse<Product>>(`${this.apiUrl}/products/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         let message: string = '';
         switch (error.status) {

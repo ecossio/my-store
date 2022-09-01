@@ -1,0 +1,54 @@
+.tw-snackbar {
+  z-index: 2000;
+
+  &.top-right {
+    top: 0;
+    right: 10px;
+  }
+
+  &.top-left {
+    top: 0;
+    left: 0;
+  }
+
+  &.bottom-right {
+    bottom: 0;
+    right: 10px;
+  }
+
+  &.bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.tw-snackbar.success {
+  @apply max-w-xs bg-green-500 text-sm text-white rounded-md shadow-lg mb-3 ml-3;
+
+  button {
+    @apply inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-white/[.5] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-800 focus:ring-green-500 transition-all text-sm dark:focus:ring-offset-green-500 dark:focus:ring-green-700;
+  }
+}
+
+.tw-snackbar.info {
+  @apply max-w-xs bg-blue-500 text-sm text-white rounded-md shadow-lg mb-3 ml-3;
+  button {
+    @apply inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-white/[.5] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-800 focus:ring-blue-500 transition-all text-sm dark:focus:ring-offset-blue-500 dark:focus:ring-blue-700;
+  }
+}
+
+.tw-snackbar.warning {
+  @apply max-w-xs bg-yellow-500 text-sm text-white rounded-md shadow-lg mb-3 ml-3;
+
+  button {
+    @apply inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-white/[.5] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-800 focus:ring-yellow-500 transition-all text-sm dark:focus:ring-offset-yellow-500 dark:focus:ring-yellow-700;
+  }
+}
+
+.tw-snackbar.error {
+  @apply max-w-xs bg-red-500 text-sm text-white rounded-md shadow-lg  mb-3 ml-3;
+
+  button {
+    @apply inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-white/[.5] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-800 focus:ring-red-500 transition-all text-sm dark:focus:ring-offset-red-500 dark:focus:ring-red-700;
+  }
+}

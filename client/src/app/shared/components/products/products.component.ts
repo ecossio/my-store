@@ -37,13 +37,9 @@ export class ProductsComponent implements OnInit {
   total: number = 0;
   productChosen: Product = {
     id: 0,
-    title: '',
+    name: '',
     description: '',
-    category: {
-      id: 0,
-      name: '',
-      typeImg: '',
-    },
+    categories: [],
     price: 0,
     images: [],
     rating: { rate: 0, count: 0 },
@@ -91,8 +87,8 @@ export class ProductsComponent implements OnInit {
     // }
 
     this.productsSrv.getProduct(id).subscribe({
-      next: (product) => {
-        this.productChosen = { ...product };
+      next: (response) => {
+        this.productChosen = { ...response.data };
         this.showProductDetails = true;
       },
       error: (errorMsg) => {
@@ -111,10 +107,10 @@ export class ProductsComponent implements OnInit {
       .getProduct(id)
       .pipe(
         switchMap((product) =>
-          this.productsSrv.update(product.id, { title: 'New title' })
+          this.productsSrv.update(product.data.id, { name: 'New title' })
         )
-        // switchMap((product) => this.productsSrv.update(id, { title: 'New title' })),
-        // switchMap((product) => this.productsSrv.update(id, { title: 'New title' }))
+        // switchMap((product) => this.productsSrv.update(id, { name: 'New title' })),
+        // switchMap((product) => this.productsSrv.update(id, { name: 'New title' }))
       )
       .subscribe((data) => {
         console.log(data);
@@ -123,7 +119,7 @@ export class ProductsComponent implements OnInit {
     // Esto para cuando no hay dependencia en las llamadas (fetchReadAndUpdate() en el servicio)
     zip(
       this.productsSrv.getProduct(id),
-      this.productsSrv.update(id, { title: 'New title again' })
+      this.productsSrv.update(id, { name: 'New title again' })
     ).subscribe((response) => {
       const product = response[0]; // Respuesta de getProduct()
       const update = response[1]; // Respuesta de update()
@@ -131,7 +127,7 @@ export class ProductsComponent implements OnInit {
 
     // Ejemplo haciendolo en el servicio
     this.productsSrv
-      .fetchReadAndUpdate(id, { title: 'change' })
+      .fetchReadAndUpdate(id, { name: 'change' })
       .subscribe((response) => {
         const product = response[0]; // Respuesta de getProduct()
         const update = response[1]; // Respuesta de update()
@@ -140,7 +136,7 @@ export class ProductsComponent implements OnInit {
 
   createNewProduct() {
     const product: CreateProductDTO = {
-      title: 'Tenis Superstar',
+      name: 'Tenis Superstar',
       description: 'Cloud White / Cloud White / Core Black',
       price: 1000,
       images: [
@@ -157,7 +153,7 @@ export class ProductsComponent implements OnInit {
 
   updateProduct() {
     const changes: UpdateProductDTO = {
-      title: 'Change title',
+      name: 'Change title',
     };
 
     const id = this.productChosen.id;

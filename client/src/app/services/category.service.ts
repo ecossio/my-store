@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { ApiResponse } from '../models/api-response.model';
 import { Category } from '../models/product.model';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class CategoryService {
       params = params.set('offset', offset);
     }
 
-    return this.http.get<Category[]>(this.apiUrl, { params });
+    // return this.http.get<Category[]>(this.apiUrl, { params });
+    return this.http.get<ApiResponse<Category[]>>(this.apiUrl, { params });
   }
 }

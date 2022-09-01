@@ -28,7 +28,7 @@ import { QuicklinkModule } from 'ngx-quicklink';
     ReversePipe,
     TimeAgoPipe,
     ClickOutsideDirective,
-    QuicklinkModule
+    QuicklinkModule,
   ],
 })
 export class SharedModule {}

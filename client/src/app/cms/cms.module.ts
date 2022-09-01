@@ -11,8 +11,8 @@ import { QuicklinkModule } from 'ngx-quicklink';
 
 @NgModule({
   declarations: [
-    TasksComponent,
     LayoutComponent,
+    TasksComponent,
     GridComponent
   ],
   imports: [
