@@ -1,0 +1,30 @@
+<!-- <app-img [img]="imgParent" (loaded)="onLoaded($event)"></app-img> -->
+
+<!-- <button type="button" (click)="createUser()" class="my-4 mx-4 button-primary">
+  Create user
+</button>-->
+<button type="button" (click)="login()" class="ml-2 mb-4 button-primary">
+  Login
+</button>
+
+<button type="button" (click)="loginAdmin()" class="ml-4 mb-4 button-primary">
+  Login Admin
+</button>
+
+<!-- Forma nativa de HTML para descargar un archivo -->
+<!-- <p>
+  <a href="../assets/files/texto.txt" download>Descargar</a>
+</p> -->
+
+<!-- Forma programatica para descargar un archivo -->
+<!-- <p>
+  <button type="button" class="button-primary" (click)="downloadPDF()">Descargar PDF</button>
+</p> -->
+
+<!-- Subida de archivo -->
+<!-- <p>
+  <input type="file" (change)="onUploadFile($event)">
+  <img *ngIf="imgUploaded" [src]="imgUploaded" alt="">
+</p> -->
+
+<router-outlet></router-outlet>

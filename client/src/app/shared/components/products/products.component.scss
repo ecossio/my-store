@@ -1,0 +1,50 @@
+.products--grid {
+  @apply grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-8 gap-8;
+}
+
+.product--detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 80%;
+  background: whitesmoke;
+  transform: translateX(100%);
+  transition: all ease-out 0.3s;
+  &.active {
+    transform: translateX(0);
+  }
+
+  .close-icon {
+    z-index: 2;
+    @apply rounded-full bg-gray-800/60 hover:bg-gray-800/80 transition absolute top-4 left-4 p-1;
+  }
+}
+
+.mySwiper {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+//Pantallas grandes (desktops de menos de 1200px)
+@media (max-width: 1199.98px) {
+  .product--detail {
+    left: 60%;
+  }
+}
+
+//Pantallas medianas (tablets de menos de 992px)
+// @media (max-width: 991.98px) { ... }
+
+// //Pantallas pequeñas (móviles en landscape de menos de 768px)
+// @media (max-width: 767.98px) { ... }
+
+// //Pantallas muy pequeñas (móviles en portrait de menos de 576px)
+@media (max-width: 575.98px) {
+  .product--detail {
+    left: 0%;
+  }
+}

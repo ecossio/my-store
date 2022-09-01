@@ -1,0 +1,14 @@
+<!-- <p class="text-3xl">img works!</p>
+<button class="btn" [disabled]="true">CLICK ME</button> -->
+
+<img
+  class="w-full h-56 object-scale-down p-1"
+  [src]="img"
+  (error)="imgError()"
+  (load)="imgLoaded()"
+  [alt]="alt"
+  *ngIf="img; else elseImg"
+/>
+<ng-template #elseImg>
+  <img [src]="imageDefault" alt="" width="200" />
+</ng-template>

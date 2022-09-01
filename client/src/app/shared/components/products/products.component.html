@@ -1,0 +1,135 @@
+<!-- <p>La cantidad {{ myShoppingCart.length }}</p>
+<p class="mb-4">Total : {{ total | currency: "MXN" }}</p> -->
+<!-- <p>{{ "Te truena la calabaza puto" | vocalsToNumbers  }}</p> -->
+<!-- <button type="button" class="button-primary" (click)="createNewProduct()">
+  Create
+</button>
+<button type="button" (click)="onShowDetails(234)" class="button-primary">Test error catch</button> -->
+
+<section class="products--grid">
+  <app-product
+    [product]="product"
+    *ngFor="let product of products"
+    (addedProduct)="onAddToShoppingCart($event)"
+  ></app-product>
+</section>
+
+<div class="flex flex-row justify-center mb-8">
+  <button
+    type="button"
+    class="inline-flex justify-center px-6 py-2 text-gray-600 font-semibold bg-gray-100 rounded-md hover:bg-gray-200 w-72"
+    (click)="onLoadMore()"
+    *ngIf="products.length"
+  >
+    <svg
+      *ngIf="showLoader"
+      class="w-5 h-5 mr-3 mt-0.5 text-gray-900 animate-spin"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
+    {{ showLoader ? "Loading more..." : "Load more" }}
+  </button>
+</div>
+
+<!-- Product details -->
+<div class="product--detail drop-shadow-xl" [class.active]="showProductDetails">
+  <div *ngIf="productChosen.id > 0">
+    <button type="button" class="close-icon" (click)="closeProductDetails()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6 opacity-50 text-white stroke-white"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M3.97 3.97a.75.75 0 011.06 0L12 10.94l6.97-6.97a.75.75 0 111.06 1.06L13.06 12l6.97 6.97a.75.75 0 11-1.06 1.06L12 13.06l-6.97 6.97a.75.75 0 01-1.06-1.06L10.94 12 3.97 5.03a.75.75 0 010-1.06z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+
+    <!-- Photo slider -->
+    <swiper
+      style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+      [slidesPerView]="1"
+      [spaceBetween]="50"
+      [pagination]="{ clickable: true }"
+      [navigation]="true"
+      [lazy]="true"
+      class="mySwiper"
+    >
+      <ng-template swiperSlide *ngFor="let img of productChosen.images">
+        <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+        <img [src]="img" alt="" class="swiper-lazy" />
+
+        <!-- Preloader image -->
+        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+      </ng-template>
+    </swiper>
+
+    <!-- Product details -->
+    <div class="px-8 py-2">
+      <!-- Title -->
+      <h2 class="text-2xl font-semibold overflow-ellipsis overflow-hidden">
+        {{ productChosen.title }}
+      </h2>
+
+      <!-- Price -->
+      <div class="mt-4">
+        <span class="text-xl font-bold">
+          {{ productChosen.price | currency: "MXN" }}
+        </span>
+        <div class="flex items-center gap-2 mt-1">
+          <span class="text-sm line-through opacity-50">{{
+            productChosen.price * 0.2 | currency: "MXN"
+          }}</span>
+          <span class="discount-percent">Save 20%</span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <p class="mt-4 mb-10">{{ productChosen.description }}</p>
+
+      <!-- Add to cart -->
+      <button
+        type="button"
+        class="button-primary block w-full"
+        (click)="onAddToShoppingCart(productChosen)"
+      >
+        Add to cart
+      </button>
+
+      <button
+        type="button"
+        class="button-primary block w-full mt-6"
+        (click)="updateProduct()"
+      >
+        Update title
+      </button>
+
+      <button
+        type="button"
+        class="button-primary block w-full mt-6"
+        (click)="deleteProduct()"
+      >
+        Delete product
+      </button>
+    </div>
+  </div>
+</div>
