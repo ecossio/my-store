@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -62,5 +63,17 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    /**
+     * Obtiene los datos del usuario autenticado
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function me(Request $request)
+    {
+        $me = $request->user();
+        return response()->json($me, Response::HTTP_OK);
     }
 }
