@@ -6,6 +6,7 @@ import { FilesService } from './services/files.service';
 import { SnackbarService } from './services/snackbar.service';
 import { TokenService } from './services/token.service';
 import { UserService } from './services/user.service';
+import { WishlistService } from './services/wishlist.service';
 
 @Component({
   selector: 'app-root',
@@ -27,14 +28,18 @@ export class AppComponent implements OnInit {
     private authSrv: AuthService,
     private tokenSrv: TokenService,
     private userSrv: UserService,
+    private wishlistSrv: WishlistService,
     private fileSrv: FilesService
   ) {}
 
   ngOnInit(): void {
-    // const token = this.tokenSrv.getToken();
-    const token = this.tokenSrv.getXSRFToken();
-    if (token) {
-      this.authSrv.getProfile().subscribe();
+    if (this.authSrv.isAuth()) {
+      this.authSrv.getProfile().subscribe((resp) => {
+        const wishlist = resp.data.wishlist?.items
+          ? resp.data.wishlist.items
+          : [];
+        this.wishlistSrv.init(wishlist);
+      });
     }
   }
 
@@ -60,8 +65,8 @@ export class AppComponent implements OnInit {
       email: 'beatty.rossie@example.com',
       password: 'password',
     };
-    this.authSrv.loginAndGet(credentials).subscribe((user) => {
-      this.profile = user;
+    this.authSrv.loginAndGet(credentials).subscribe((resp) => {
+      this.profile = resp.data;
     });
   }
 
@@ -70,8 +75,8 @@ export class AppComponent implements OnInit {
       email: 'admin@mail.com',
       password: 'admin123',
     };
-    this.authSrv.loginAndGet(credentials).subscribe((user) => {
-      this.profile = user;
+    this.authSrv.loginAndGet(credentials).subscribe((resp) => {
+      this.profile = resp.data;
     });
   }
 

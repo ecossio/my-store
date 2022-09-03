@@ -1,162 +1,43 @@
-<div class="product-card">
+<div class="product-card group relative scale-effect" [routerLink]="['/product', product.id]">
+
+  <!-- Wishlist button -->
+  <div class="flex absolute top-2 right-2 h-8 w-8 invisible group-hover:visible transition">
+    <button type="button" class="scale-effect" title="Add to Wish List"  (click)="addToWishlist();$event.stopPropagation()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 fill-red-500 hover:fill-red-600 text-white transition-colors">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+    </button>
+  </div>
+
   <app-img
     [img]="product.images[0]"
     [alt]="product.name"
-    [routerLink]="['/product', product.id]"
     class="cursor-pointer"
-></app-img>
-  <div class="p-5 flex flex-col gap-3">
-    <!-- badge -->
-    <div class="flex items-center gap-2">
-      <span class="badge">stock ready</span>
-      <span class="badge">official store</span>
-    </div>
-
+  ></app-img>
+  <div class="px-3 pb-3 pt-0 flex flex-col gap-3">
     <!-- Product titlte -->
     <h2 class="product-title" [title]="product.name">{{ product.name }}</h2>
 
     <!-- Product price -->
-    <div>
-      <span class="text-xl font-bold">
-        {{ product.price | currency: "MXN" }}
-      </span>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="text-sm line-through opacity-50">{{
-          product.price * 0.2 | currency: "MXN"
-        }}</span>
-        <span class="discount-percent">Save 20%</span>
+    <div class="flex justify-end gap-1 pt-3">
+      <div class="flex flex-col justify-end group-hover:hidden">
+        <span class="discount-percent m-1">-20%</span>
       </div>
-    </div>
-
-    <!-- Product rating-->
-    <span class="flex items-center mt-1">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-          clip-rule="evenodd"
-        />
-      </svg>
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-          clip-rule="evenodd"
-        />
-      </svg>
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-          clip-rule="evenodd"
-        />
-      </svg>
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-          clip-rule="evenodd"
-        />
-      </svg>
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      <span class="text-xs ml-2 text-gray-500">20k reviews</span>
-    </span>
-
-    <!-- Product action buttons -->
-    <div class="mt-5 flex gap-2">
-      <button
-        type="button"
-        class="button-primary"
-        (click)="onAddtoShoppingCart()"
-      >
-        Add to cart
-      </button>
-
-      <button class="button-icon">
-        <div class="opacity-50">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            class="w-5 h-5"
-          >
-            <path
-              d="M9.693 17.934l-.003-.001-.006-.003-.021-.01a8.112 8.112 0 01-.355-.172 20.748 20.748 0 01-3.917-2.592C3.266 13.361 1 10.608 1 7a5 5 0 019-3 5 5 0 019 3c0 3.608-2.266 6.361-4.39 8.156a20.745 20.745 0 01-4.196 2.729 7.809 7.809 0 01-.077.035l-.021.01-.006.003-.002.001a.766.766 0 01-.615 0z"
-            />
+      <div class="flex flex-col items-end justify-between">
+        <span class="text-sm line-through leading-3 opacity-75">{{
+          product.price | currency: "MXN"
+        }}</span>
+        <span class="text-lg font-bold">
+          {{ product.price - (product.price * 0.2) | currency: "MXN" }}
+        </span>
+      </div>
+      <div class="whitespace-nowrap flex gap-2 invisible w-0 group-hover:ml-2 group-hover:w-12 group-hover:visible">
+        <button type="button" title="Add to Cart" class="button-icon cart" (click)="onAddtoShoppingCart();$event.stopPropagation()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
           </svg>
-        </div>
-      </button>
-
-      <a class="button-icon" routerLink="." [queryParams]="{product: product.id }">
-        <div class="opacity-50">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            class="w-5 h-5"
-          >
-            <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
-            <path
-              fill-rule="evenodd"
-              d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
-      </a>
-
-      <!-- <button class="button-icon" (click)="onShowDetails()">
-        <div class="opacity-50">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            class="w-5 h-5"
-          >
-            <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
-            <path
-              fill-rule="evenodd"
-              d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
-      </button> -->
+        </button>
+      </div>
     </div>
   </div>
 </div>

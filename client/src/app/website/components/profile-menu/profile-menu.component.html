@@ -12,7 +12,7 @@
     >
       <span class="sr-only">Open user menu</span>
       <img
-        class="h-8 w-8 rounded-full"
+        class="h-9 w-9 rounded-full"
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         alt=""
       />
@@ -54,8 +54,15 @@
       role="menuitem"
       tabindex="-1"
       id="user-menu-item-1"
-      >Settings</a
     >
+      <div class="flex justify-between">
+        Wishlist
+        <span
+          class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300"
+          >{{ totalWishes }}</span
+        >
+      </div>
+    </a>
     <a
       class="user-menu-dropdown-item cursor-pointer"
       role="menuitem"

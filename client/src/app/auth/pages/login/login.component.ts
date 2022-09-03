@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Credentials } from 'src/app/models/user.model';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { WishlistService } from 'src/app/services/wishlist.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private authSrv: AuthService,
-    private snackbarSrv: SnackbarService
+    private snackbarSrv: SnackbarService,
+    private wishlistSrv: WishlistService
   ) {
     this.form = this.formBuilder.group({
       email: [
@@ -50,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.form.get('email')?.setValue('mkirlin@example.net');
+    this.form.get('email')?.setValue('runolfsson.quinn@example.org');
     this.form.get('password')?.setValue('password');
   }
 
@@ -68,15 +70,17 @@ export class LoginComponent implements OnInit, OnDestroy {
         .loginAndGet(params)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (user) => {
-            // console.log('data login', user);
+          next: (resp) => {
+            const wislish = resp.data.wishlist
+              ? resp.data.wishlist
+              : { total_wishes: 0, items: [] };
+
+            this.wishlistSrv.init(wislish.items);
             this.router.navigate(['/home']);
           },
           error: (eMsg) => {
             this.btnSubmitOpts.loading = false;
             this.btnSubmitOpts.text = 'Sign in';
-            // this.form.get('password')?.setValue('');
-            // this.passwordLoginInput.nativeElement.focus();
             this.snackbarSrv.showErrorToast(eMsg);
           },
           complete: () => {},

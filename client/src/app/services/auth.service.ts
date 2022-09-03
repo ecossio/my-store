@@ -11,6 +11,7 @@ import { TokenService, LS_DATA_KEY } from './token.service';
 import { LocalStorageService } from './local-storage.service';
 import { environment } from './../../environments/environment';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { ApiResponse } from '../models/api-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -60,38 +61,41 @@ export class AuthService {
     );
   }
 
-  getProfile(): Observable<User> {
-    let myObservable = new Observable<User>();
+  getProfile(): Observable<ApiResponse<User>> {
+    let myObservable = new Observable<ApiResponse<User>>();
     let lsData = this.lsSrv.getJsonValue(LS_DATA_KEY);
 
-    if (this.lsSrv.existsAndHasProperty(LS_DATA_KEY, 'user')) {
-      myObservable = new Observable<User>((subscriber) => {
-        subscriber.next(lsData.user);
+    if (this.isAuth()) {
+      myObservable = new Observable<ApiResponse<User>>((subscriber) => {
+        subscriber.next({ data: lsData.user });
         this.user.next(lsData.user);
       });
     } else {
-      myObservable = this.http.get<User>(`${this.apiUrl}/api/users/me`).pipe(
-        tap((user) => {
-          if (lsData) {
-            lsData.user = user;
-          } else {
-            lsData = { user };
-          }
+      myObservable = this.http
+        .get<ApiResponse<User>>(`${this.apiUrl}/api/users/me`)
+        .pipe(
+          tap((resp) => {
+            const user = resp.data;
+            if (lsData) {
+              lsData.user = user;
+            } else {
+              lsData = { user };
+            }
 
-          this.lsSrv.setJsonValue(LS_DATA_KEY, lsData);
-          this.user.next(user);
-        }),
-        catchError((e: HttpErrorResponse) => {
-          let message: string = '';
-          if (e.status == 401 || e.status == 419) {
-            message = 'No estás autenticado';
-            this.tokenSrv.remove();
-          } else {
-            message = e.error.message;
-          }
-          return throwError(() => message);
-        })
-      );
+            this.lsSrv.setJsonValue(LS_DATA_KEY, lsData);
+            this.user.next(user);
+          }),
+          catchError((e: HttpErrorResponse) => {
+            let message: string = '';
+            if (e.status == 401 || e.status == 419) {
+              message = 'No estás autenticado';
+              this.tokenSrv.remove();
+            } else {
+              message = e.error.message;
+            }
+            return throwError(() => message);
+          })
+        );
     }
 
     return myObservable;
@@ -116,5 +120,9 @@ export class AuthService {
         })
       )
       .subscribe();
+  }
+
+  isAuth() {
+    return this.lsSrv.existsAndHasProperty(LS_DATA_KEY, 'user') ? true : false;
   }
 }

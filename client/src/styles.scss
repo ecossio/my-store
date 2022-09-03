@@ -7,6 +7,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background: #fafafa;
+}
+
 .btn {
   @apply border-2 p-2 bg-green-300 rounded-2xl hover:bg-green-700 transition disabled:opacity-25 disabled:pointer-events-none;
 }

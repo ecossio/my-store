@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   trigger,
   state,
@@ -7,6 +7,7 @@ import {
   transition,
 } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
+import { WishlistService } from 'src/app/services/wishlist.service';
 
 @Component({
   selector: 'app-profile-menu',
@@ -35,9 +36,20 @@ import { AuthService } from 'src/app/services/auth.service';
     ]),
   ],
 })
-export class ProfileMenuComponent {
+export class ProfileMenuComponent implements OnInit {
   userMenuActive: boolean = false;
-  constructor(private authSrv: AuthService) {}
+  totalWishes: number = 0;
+
+  constructor(
+    private authSrv: AuthService,
+    private wishlistSrv: WishlistService
+  ) {}
+
+  ngOnInit(): void {
+    this.wishlistSrv.myTotalWishes$.subscribe((count) => {
+      this.totalWishes = count;
+    });
+  }
 
   toggleUserMenu() {
     this.userMenuActive = !this.userMenuActive;

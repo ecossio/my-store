@@ -1,5 +1,10 @@
 .product-card {
-  @apply bg-white text-gray-700 w-72 min-h-[10rem] shadow-md rounded-md overflow-hidden border-transparent border-2 hover:border-gray-400 ;
+  border-radius: 3px;
+  @apply bg-white text-gray-700 w-64 min-h-[10rem] shadow-md overflow-hidden border-0 hover:shadow-xl cursor-pointer;
+}
+
+.scale-effect {
+  @apply transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-200
 }
 
 .badge {
@@ -12,4 +17,11 @@
 
 .button-icon {
   @apply flex-grow flex justify-center items-center bg-gray-300/60 hover:bg-gray-300/80 transition rounded-md;
+  &.cart {
+    @apply bg-green-600/80 hover:bg-green-600/100;
+  }
+}
+
+.discount-percent {
+  @apply bg-gray-800/90 px-1.5 py-0.5 rounded-md text-sm font-semibold leading-7 text-white;
 }

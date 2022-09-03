@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { WishlistService } from '../../../services/wishlist.service';
 import { Product } from '../../../models/product.model';
 
 @Component({
@@ -20,12 +21,20 @@ export class ProductComponent {
     rating: { rate: 0, count: 0 },
   };
 
-  constructor() {}
+  constructor(private wishlistSrv: WishlistService) {}
 
   onAddtoShoppingCart() {
     this.addedProduct.emit(this.product);
   }
 
+  addToWishlist() {
+    this.wishlistSrv.addWish(this.product.id).subscribe({
+      next: (resp) => {},
+      error: (e) => {
+
+      },
+    });
+  }
   /*
   onShowDetails() {
     this.showProduct.emit(this.product.id);
