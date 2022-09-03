@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\V1\Category;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\V1\CategoryResource;
 
-class CategoryController extends Controller
+class CategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.

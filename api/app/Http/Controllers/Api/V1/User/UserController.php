@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
+use App\Http\Resources\V1\UserProfileResourse;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -73,7 +74,10 @@ class UserController extends Controller
      */
     public function me(Request $request)
     {
-        $me = $request->user();
-        return response()->json($me, Response::HTTP_OK);
+        $user = $request->user();
+        // $user->totalWishes();
+
+        return new UserProfileResourse($user);
+        // return response()->json($user, Response::HTTP_OK);
     }
 }

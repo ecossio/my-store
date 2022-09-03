@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\V1\Product;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\V1\CategoryResource;
 
-class ProductCategoryController extends Controller
+class ProductCategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.

@@ -22,7 +22,7 @@ class Product extends Model
     ];
 
     /**
-     * Model relationship
+     * Model relationships
      */
     public function categories()
     {

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Administrator;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         Product::flushEventListeners();
 
         User::factory(5)->create();
+        Administrator::factory(1)->create();
         Category::factory(5)->create();
         Product::factory(100)->create()->each(
             function ($product) {
