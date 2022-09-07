@@ -1,0 +1,26 @@
+<div *ngIf="user">
+  <h1 class="mb-5 pb-6 border-b-2 text-xl font-extrabold text-gray-900/75">
+    Profile
+  </h1>
+  <form class="max-w-6xl">
+    <div class="md:flex mb-6">
+      <div class="md:w-1/3 pl-0 py-2 pr-2">
+        <label class="text-gray-700/80 font-semibold">Your photo</label>
+      </div>
+
+      <div class="md:w-2/3 p-2">
+        <div class="flex items-center">
+          <img class="w-24 h-24 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+          <div class="ml-3">
+            <button type="button" class="px-2 py-2 font-semibold text-indigo-800 hover:text-indigo-600">Upload new photo</button>
+            <button type="button" class="px-2 py-2 font-semibold text-red-700 hover:text-red-600">Remove</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+  <p>Nombre: {{ user.name }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Role: {{ user.role }}</p>
+</div>

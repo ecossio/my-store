@@ -1,0 +1,29 @@
+<h1 class="mb-10 text-3xl font-extrabold tracking-wide text-gray-900/75">
+  Settings
+</h1>
+
+<div class="border-b mb-10">
+  <ul
+    class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400"
+  >
+    <li class="mr-2">
+      <a
+        routerLink="profile"
+        routerLinkActive="active"
+        class="tab-link"
+        aria-current="page"
+        >Profile</a
+      >
+    </li>
+    <li class="mr-2">
+      <a routerLink="email" routerLinkActive="active" class="tab-link">Email</a>
+    </li>
+    <li class="mr-2">
+      <a routerLink="password" routerLinkActive="active" class="tab-link"
+        >Password</a
+      >
+    </li>
+  </ul>
+</div>
+
+<router-outlet></router-outlet>

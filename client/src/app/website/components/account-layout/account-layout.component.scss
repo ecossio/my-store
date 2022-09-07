@@ -1,0 +1,10 @@
+:host {
+  height: 100vh;
+}
+
+.active {
+  @apply bg-gray-900;
+  svg {
+    color: white;
+  }
+}

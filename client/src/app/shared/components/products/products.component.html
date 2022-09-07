@@ -5,45 +5,46 @@
   Create
 </button>
 <button type="button" (click)="onShowDetails(234)" class="button-primary">Test error catch</button> -->
+<div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+  <section class="products--grid">
+    <app-product
+      [product]="product"
+      *ngFor="let product of products"
+      (addedProduct)="onAddToShoppingCart($event)"
+    ></app-product>
+  </section>
 
-<section class="products--grid">
-  <app-product
-    [product]="product"
-    *ngFor="let product of products"
-    (addedProduct)="onAddToShoppingCart($event)"
-  ></app-product>
-</section>
-
-<div class="flex flex-row justify-center mb-8">
-  <button
-    type="button"
-    class="inline-flex justify-center px-6 py-2 text-gray-600 font-semibold bg-gray-100 rounded-md hover:bg-gray-200 w-72"
-    (click)="onLoadMore()"
-    *ngIf="products.length"
-  >
-    <svg
-      *ngIf="showLoader"
-      class="w-5 h-5 mr-3 mt-0.5 text-gray-900 animate-spin"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
+  <div class="flex flex-row justify-center mb-8">
+    <button
+      type="button"
+      class="inline-flex justify-center px-6 py-2 text-gray-600 font-semibold bg-gray-100 rounded-md hover:bg-gray-200 w-72"
+      (click)="onLoadMore()"
+      *ngIf="products.length"
     >
-      <circle
-        class="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        stroke-width="4"
-      ></circle>
-      <path
-        class="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      ></path>
-    </svg>
-    {{ showLoader ? "Loading more..." : "Load more" }}
-  </button>
+      <svg
+        *ngIf="showLoader"
+        class="w-5 h-5 mr-3 mt-0.5 text-gray-900 animate-spin"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+      {{ showLoader ? "Loading more..." : "Load more" }}
+    </button>
+  </div>
 </div>
 
 <!-- Product details -->

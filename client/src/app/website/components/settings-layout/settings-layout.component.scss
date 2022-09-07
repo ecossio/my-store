@@ -1,0 +1,15 @@
+.tab-link {
+  @apply inline-block py-1 px-2 rounded-tl rounded-tr hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white;
+  &:hover {
+    background-color: #6366f1;
+    border-bottom: solid #3d3f9b;
+    @apply border-b-2;
+  }
+
+  &.active {
+    color: #7d66a7;
+    background-color: #f8f4ff;
+    border-bottom: solid #7d66a7;
+    @apply border-b-2 rounded-bl-none rounded-br-none;
+  }
+}
