@@ -23,6 +23,7 @@
         title="Confirm your new email"
         placeholder="mynewemail@mail.com"
         maxlength="200"
+        autocomplete="off"
       />
       <ng-container *ngIf="Form.submitted && (frm['email_confirmation'].dirty || frm['email_confirmation'].touched)">
         <p class="text-red-500 text-xs italic" *ngIf="frm['email_confirmation'].hasError('required')">Campo requerido</p>
@@ -42,6 +43,7 @@
         formControlName="password"
         title="Your current password"
         maxlength="200"
+        autocomplete="off"
       />
       <p class="text-red-500 text-xs italic" *ngIf="Form.submitted && frm['password'].hasError('required') && (frm['password'].dirty || frm['password'].touched)">Campo requerido</p>
     </div>
