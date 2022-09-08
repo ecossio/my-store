@@ -71,9 +71,14 @@ class User extends Authenticatable
     /**
      * Accesors
      */
-    public function getNameAttribute($valor)
+    public function getFirstNameAttribute($valor)
     {
         return ucwords($valor); //primer letra de cada palabra en mayuscula
+    }
+
+    public function getLastNameAttribute($valor)
+    {
+        return ucwords($valor);
     }
 
     /**
