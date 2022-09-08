@@ -1,15 +1,15 @@
 .tab-link {
-  @apply inline-block py-1 px-2 rounded-tl rounded-tr hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white;
+  @apply inline-block p-4 rounded-tl rounded-tr dark:hover:text-gray-700/75;
   &:hover {
-    background-color: #6366f1;
-    border-bottom: solid #3d3f9b;
-    @apply border-b-2;
+    // background-color: #6366f1;
+    // border-bottom: solid #3d3f9b;
+    @apply border-b-2 border-b-gray-700/75;
   }
 
   &.active {
-    color: #7d66a7;
-    background-color: #f8f4ff;
-    border-bottom: solid #7d66a7;
+    color: #6366f1;
+    // background-color: #f8f4ff;
+    border-bottom: solid #6366f1;
     @apply border-b-2 rounded-bl-none rounded-br-none;
   }
 }

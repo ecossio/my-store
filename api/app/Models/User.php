@@ -23,7 +23,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -52,9 +53,14 @@ class User extends Authenticatable
     /**
      * Mutators
      */
-    public function setNameAttribute($valor)
+    public function setFirstNameAttribute($valor)
     {
-        $this->attributes['name'] = strtolower($valor);
+        $this->attributes['first_name'] = strtolower($valor);
+    }
+
+    public function setLastNameAttribute($valor)
+    {
+        $this->attributes['last_name'] = strtolower($valor);
     }
 
     public function setEmailAttribute($valor)

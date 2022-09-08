@@ -76,14 +76,7 @@ export class AuthService {
         .pipe(
           tap((resp) => {
             const user = resp.data;
-            if (lsData) {
-              lsData.user = user;
-            } else {
-              lsData = { user };
-            }
-
-            this.lsSrv.setJsonValue(LS_DATA_KEY, lsData);
-            this.user.next(user);
+            this.updateUserProfileLS(user);
           }),
           catchError((e: HttpErrorResponse) => {
             let message: string = '';
@@ -124,5 +117,21 @@ export class AuthService {
 
   isAuth() {
     return this.lsSrv.existsAndHasProperty(LS_DATA_KEY, 'user') ? true : false;
+  }
+
+  /**
+   * Update user data in local storage
+   * @param user
+   */
+  updateUserProfileLS(user: User): void {
+    let lsData = this.lsSrv.getJsonValue(LS_DATA_KEY);
+    if (lsData) {
+      lsData.user = user;
+    } else {
+      lsData = { user };
+    }
+
+    this.lsSrv.setJsonValue(LS_DATA_KEY, lsData);
+    this.user.next(user);
   }
 }

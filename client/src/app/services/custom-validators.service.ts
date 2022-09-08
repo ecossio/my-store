@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +12,7 @@ import { FormGroup } from '@angular/forms';
 export class CustomValidatorsService {
   constructor() {}
 
+  /*
   passwordMatchValidator(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -23,6 +29,20 @@ export class CustomValidatorsService {
       } else {
         matchingControl.setErrors(null);
       }
+    };
+  }*/
+
+  passwordMatchValidator(source: string, target: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const sourceCtrl = control.get(source);
+      const targetCtrl = control.get(target);
+
+      const sourceValue = sourceCtrl ? sourceCtrl.value : null;
+      const targetValue = targetCtrl ? targetCtrl.value : null;
+      // console.log(sourceValue, targetValue, sourceValue !== targetValue);
+      const result = sourceValue !== targetValue ? { mismatch: true } : null;
+
+      return result;
     };
   }
 

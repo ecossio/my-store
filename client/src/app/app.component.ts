@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
   imgParent = 'https://www.w3schools.com/howto/img_avatar.png';
   profile: User = {
     id: 0,
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     role: 'customer',
@@ -50,7 +51,8 @@ export class AppComponent implements OnInit {
   createUser() {
     this.userSrv
       .create({
-        name: 'José',
+        first_name: 'José',
+        last_name: 'Lopez',
         email: 'jose@mail.com',
         password: '12345',
         role: 'customer',

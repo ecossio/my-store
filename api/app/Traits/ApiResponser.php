@@ -13,7 +13,7 @@ trait ApiResponser
     // Función para retornar una respuesta de error
     protected function errorResponse($message, $code)
     {
-        return response()->json(['error' => $message, 'code' => $code], $code);
+        return response()->json(['message' => $message, 'code' => $code], $code);
     }
 
     // Función para retornar un mensaje

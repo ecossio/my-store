@@ -12,7 +12,8 @@ export interface Wishlist {
 
 export interface User {
   id: number;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   role: 'customer' | 'admin';
   password: string;
@@ -20,3 +21,20 @@ export interface User {
 }
 
 export interface CreateUserDTO extends Omit<User, 'id'> {}
+
+export interface UpdateUserProfileDTO {
+  first_name: string;
+  last_name: string;
+}
+
+export interface UpdateUserEmailDTO {
+  email: string;
+  email_confirmation: string;
+  password: string;
+}
+
+export interface UpdateUserPasswordDTO {
+  password: string;
+  password_confirmation: string;
+  current_password: string;
+}

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
@@ -34,6 +35,6 @@ import { PasswordComponent } from './pages/account/settings/password/password.co
     EmailComponent,
     PasswordComponent,
   ],
-  imports: [CommonModule, WebsiteRoutingModule, SharedModule, SwiperModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, WebsiteRoutingModule, SharedModule, SwiperModule],
 })
 export class WebsiteModule {}

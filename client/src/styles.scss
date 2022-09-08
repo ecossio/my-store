@@ -22,3 +22,15 @@ body {
 .discount-percent {
   @apply bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white;
 }
+
+.tw-btn {
+  @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg text-sm disabled:cursor-default disabled:opacity-80;
+
+  &.tw-btn-primary {
+    @apply bg-[#6366f1] hover:bg-[#5155f5] hover:text-white text-indigo-100;
+  }
+
+  svg.loader {
+    @apply w-4 h-4 mr-2.5 mt-0.5 text-white animate-spin;
+  }
+}

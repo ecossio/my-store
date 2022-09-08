@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Credentials } from 'src/app/models/user.model';
-import { Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
 
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.form.get('email')?.setValue('runolfsson.quinn@example.org');
+    this.form.get('email')?.setValue('bertha.kautzer@example.org');
     this.form.get('password')?.setValue('password');
   }
 
