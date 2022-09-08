@@ -12,6 +12,7 @@ import { LocalStorageService } from './local-storage.service';
 import { environment } from './../../environments/environment';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private tokenSrv: TokenService,
-    private lsSrv: LocalStorageService
+    private lsSrv: LocalStorageService,
+    private router: Router
   ) {}
 
   getCSRFCookie() {
@@ -105,6 +107,7 @@ export class AuthService {
         tap(() => {
           this.tokenSrv.remove();
           this.user.next(null);
+          this.router.navigate(['/home']);
         }),
         catchError((error: HttpErrorResponse) => {
           this.tokenSrv.remove();
