@@ -1,6 +1,6 @@
 <div [class]="type + ' ' +position" class="tw-snackbar fixed w-80" role="alert" [@sbTrigger]="visible ? openAnimation: closeAnimation">
   <div class="flex p-4">
-    <p>{{ message }}</p>
+    <p [innerHTML]="message"></p>
 
     <div class="ml-auto">
       <button type="button" (click)="dismiss()">

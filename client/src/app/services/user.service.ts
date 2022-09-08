@@ -40,7 +40,9 @@ export class UserService {
     return this.http.put<ApiResponse<User>>(
       `${this.apiUrl}/${user_id}/update_email`,
       dto
-    );
+    ).pipe(tap((resp) => {
+      this.authSrv.updateUserProfileLS(resp.data);
+    }))
   }
 
   updatePassword(user_id: number, dto: UpdateUserPasswordDTO) {

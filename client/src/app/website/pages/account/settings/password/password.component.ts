@@ -45,7 +45,7 @@ export class PasswordComponent implements OnInit {
         current_password: ['', Validators.required],
       },
       {
-        validators: this.myValidators.passwordMatchValidator(
+        validators: this.myValidators.matchValidator(
           'password',
           'password_confirmation'
         ),
@@ -72,7 +72,7 @@ export class PasswordComponent implements OnInit {
 
       this.userSrv.updatePassword(user_id, params).subscribe({
         next: () => {
-          this.snackbarSrv.showSuccessToast('Password updated.');
+          this.snackbarSrv.showSuccessToast('<strong>Password updated</strong><br><p>Use your new password at your next login.</p>');
         },
         error: (e) => {
           this.isUpdating = false;

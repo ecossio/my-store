@@ -1,1 +1,78 @@
 <h1 class="mb-5 text-xl font-extrabold text-gray-900/75">Email</h1>
+<form [formGroup]="form" #Form="ngForm" (ngSubmit)="updateEmail()" class="max-w-sm">
+  <div class="tw-row">
+    <div class="tw-col">
+      <label for="email" class="tw-input-label">New email</label>
+      <input type="email" id="email" class="tw-input" formControlName="email" title="Your new email" placeholder="mynewemail@mail.com" maxlength="200"/>
+      <ng-container *ngIf="Form.submitted && frm['email'].invalid && (frm['email'].dirty || frm['email'].touched)">
+        <p class="text-red-500 text-xs italic" *ngIf="frm['email'].hasError('required')">Campo requerido</p>
+        <p class="text-red-500 text-xs italic" *ngIf="frm['email'].hasError('pattern') || frm['email'].hasError('email')">Formato de email incorrecto</p>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="tw-row">
+    <div class="tw-col">
+      <label for="email_confirmation" class="tw-input-label"
+        >Confirm email</label
+      >
+      <input
+        type="email_confirmation"
+        class="tw-input"
+        formControlName="email_confirmation"
+        title="Confirm your new email"
+        placeholder="mynewemail@mail.com"
+        maxlength="200"
+      />
+      <ng-container *ngIf="Form.submitted && (frm['email_confirmation'].dirty || frm['email_confirmation'].touched)">
+        <p class="text-red-500 text-xs italic" *ngIf="frm['email_confirmation'].hasError('required')">Campo requerido</p>
+        <p class="text-red-500 text-xs italic" *ngIf="frm['email_confirmation'].hasError('pattern') || frm['email_confirmation'].hasError('email')">Formato de email incorrecto</p>
+        <p class="text-red-500 text-xs italic" *ngIf="emailMatchError">Los correos electrónicos no coinciden</p>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="tw-row">
+    <div class="tw-col">
+      <label for="password" class="tw-input-label">Password</label>
+      <input
+        type="password"
+        class="tw-input"
+        placeholder="********"
+        formControlName="password"
+        title="Your current password"
+        maxlength="200"
+      />
+      <p class="text-red-500 text-xs italic" *ngIf="Form.submitted && frm['password'].hasError('required') && (frm['password'].dirty || frm['password'].touched)">Campo requerido</p>
+    </div>
+  </div>
+
+  <div class="tw-row">
+    <div class="tw-col">
+      <button class="tw-btn tw-btn-primary w-24 float-right">
+        <svg
+          *ngIf="isUpdating"
+          class="loader"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

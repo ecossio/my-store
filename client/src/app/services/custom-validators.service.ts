@@ -32,14 +32,13 @@ export class CustomValidatorsService {
     };
   }*/
 
-  passwordMatchValidator(source: string, target: string): ValidatorFn {
+  matchValidator(source: string, target: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const sourceCtrl = control.get(source);
       const targetCtrl = control.get(target);
 
       const sourceValue = sourceCtrl ? sourceCtrl.value : null;
       const targetValue = targetCtrl ? targetCtrl.value : null;
-      // console.log(sourceValue, targetValue, sourceValue !== targetValue);
       const result = sourceValue !== targetValue ? { mismatch: true } : null;
 
       return result;

@@ -125,7 +125,7 @@ class UserController extends ApiController
             return $this->errorResponse('Password incorrect', 401);
         }
 
-        return $this->showMessage('Email updated');
+        return new UserProfileResourse($user);
     }
 
     /**
