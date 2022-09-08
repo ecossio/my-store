@@ -3,6 +3,7 @@
 namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileResourse extends JsonResource
 {
@@ -19,8 +20,8 @@ class UserProfileResourse extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
+            'profile_picture' => $this->profile_picture ? asset("storage/profile_pictures/{$this->profile_picture}") : null,
             'wishlist' => ['total_wishes' => $this->totalWishes(), 'items' => ItemWishlistResource::collection($this->wishes())]
-
         ];
     }
 }

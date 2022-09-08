@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.form.get('email')?.setValue('bertha.kautzer@example.org');
+    this.form.get('email')?.setValue('herman.jamarcus@example.net');
     this.form.get('password')?.setValue('password');
   }
 

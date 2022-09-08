@@ -27,7 +27,7 @@ body {
   @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg text-sm disabled:cursor-default disabled:opacity-80;
 
   &.tw-btn-primary {
-    @apply bg-[#6366f1] hover:bg-[#5155f5] hover:text-white text-indigo-100;
+    @apply bg-[#6366f1] hover:bg-[#5155f5] hover:text-white text-indigo-100 disabled:hover:bg-[#6366f1] disabled:hover:text-indigo-100;
   }
 
   svg.loader {

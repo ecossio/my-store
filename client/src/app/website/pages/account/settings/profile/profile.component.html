@@ -5,32 +5,41 @@
   <form
     [formGroup]="form"
     #profileForm="ngForm"
-    (ngSubmit)="updateProfile()"
+    (ngSubmit)="onSubmit()"
     id="profileFrm"
-    class="max-w-6xl"
+    class="max-w-3xl"
   >
     <div class="md:flex mb-6">
       <div class="md:w-1/3 pl-0 py-2 pr-2">
-        <label class="text-gray-700/80 font-semibold">Avatar</label>
+        <label class="text-gray-700/80 font-semibold">Profile picture</label>
       </div>
 
-      <div class="md:w-2/3 p-2">
-        <div class="flex items-center">
+      <div class="md:w-2/3">
+        <div class="md:flex items-center">
           <img
-            class="w-24 h-24 rounded-full"
-            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+            class="w-24 h-24 rounded-full object-cover bg-white border-2 border-gray-300/30 shadow-lg flex-shrink-0"
+            [src]="user.profile_picture"
             alt=""
           />
-          <div class="ml-3">
+          <div class="flex md:ml-3 mt-3 md:mt-0 flex-shrink-0">
+            <input
+              type="file"
+              class="hidden"
+              #fileInput
+              accept="image/png, image/gif, image/jpeg, image/bmp"
+              (change)="onUploadFile($event)"
+            />
             <button
+              (click)="fileInput.click()"
               type="button"
-              class="px-2 py-2 font-semibold text-indigo-800 hover:text-indigo-600"
+              class="px-2.5 md:px-5 py-2.5 font-medium bg-blue-50 border border-blue-500/50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm shadow-sm"
             >
-              Change avatar
+              Change picture
             </button>
             <button
+              (click)="onDeleteFile()"
               type="button"
-              class="px-2 py-2 font-semibold text-red-700 hover:text-red-600"
+              class="ml-3 px-2.5 md:px-5 py-2.5 font-medium text-gray-400 whitespace-no-wrap bg-transparent/0 border border-gray-500/30 rounded-lg text-sm shadow-sm hover:bg-gray-50 hover:text-red-700 focus:outline-none focus:shadow-none"
             >
               Remove
             </button>
@@ -112,7 +121,10 @@
       </div>
     </div>
     <div class="flex justify-end mb-6 pr-3">
-      <button class="tw-btn tw-btn-primary w-32" [disabled]="isUpdating">
+      <button
+        class="tw-btn tw-btn-primary w-32"
+        [disabled]="isUpdating || !profileForm.dirty"
+      >
         <svg
           *ngIf="isUpdating"
           class="loader"

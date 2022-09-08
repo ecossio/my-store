@@ -37,6 +37,7 @@ import { WishlistService } from 'src/app/services/wishlist.service';
   ],
 })
 export class ProfileMenuComponent implements OnInit {
+  profilePicture: string | undefined | null = null;
   userMenuActive: boolean = false;
   totalWishes: number = 0;
 
@@ -46,6 +47,10 @@ export class ProfileMenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.authSrv.user$.subscribe((user) => {
+      this.profilePicture = user?.profile_picture;
+    });
+
     this.wishlistSrv.myTotalWishes$.subscribe((count) => {
       this.totalWishes = count;
     });

@@ -17,14 +17,16 @@ export interface User {
   email: string;
   role: 'customer' | 'admin';
   password: string;
+  profile_picture?: string;
   wishlist?: Wishlist;
 }
 
 export interface CreateUserDTO extends Omit<User, 'id'> {}
 
 export interface UpdateUserProfileDTO {
-  first_name: string;
-  last_name: string;
+  first_name?: string;
+  last_name?: string;
+  profile_picture?: File;
 }
 
 export interface UpdateUserEmailDTO {

@@ -4,6 +4,7 @@ import { UpdateUserProfileDTO, User } from 'src/app/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { FilesService } from 'src/app/services/files.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
     private authSrv: AuthService,
     private userSrv: UserService,
     private formBuilder: FormBuilder,
+    private fileSrv: FilesService,
     private snackbarSrv: SnackbarService
   ) {
     this.form = this.createForm();
@@ -50,27 +52,60 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  updateProfile() {
+  onSubmit() {
     if (!this.form.invalid) {
-      this.isUpdating = true;
       const params: UpdateUserProfileDTO = this.form.value;
-      const user_id = this.user?.id ? this.user?.id : 0;
-      this.userSrv.updateProfile(user_id, params).subscribe({
-        error: (e) => {
-          if (e.status == 500) {
-            this.snackbarSrv.showErrorToast('Unexpected error');
-          }
-        },
-        complete: () => {
-          this.isUpdating = false;
-        },
-      });
+      this.updateProfile(params);
     } else {
       if (this.form.value.first_name === '') {
         this.firstnameInput.nativeElement.focus();
       } else if (this.form.value.last_name === '') {
         this.lastnameInput.nativeElement.focus();
       }
+    }
+  }
+
+  private updateProfile(dto: UpdateUserProfileDTO) {
+    this.isUpdating = true;
+    // const params: UpdateUserProfileDTO = this.form.value;
+    const user_id = this.user?.id ? this.user?.id : 0;
+    this.userSrv.updateProfile(user_id, dto).subscribe({
+      error: (e) => {
+        this.isUpdating = false;
+        if (e.status == 500) {
+          this.snackbarSrv.showErrorToast('Unexpected error');
+        }
+      },
+      complete: () => {
+        this.isUpdating = false;
+        this.snackbarSrv.showSuccessToast('Perfil actualizado');
+      },
+    });
+  }
+
+  private updateProfilePicture(file?: File) {
+    const user_id = this.user?.id ? this.user?.id : 0;
+    this.userSrv.updateProfilePicture(user_id, file).subscribe({
+      error: (e) => {
+        if (e.status == 500) {
+          this.snackbarSrv.showErrorToast('Unexpected error');
+        }
+      },
+    });
+  }
+
+  onUploadFile(event: Event) {
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+
+    if (file) {
+      this.updateProfilePicture(file);
+    }
+  }
+
+  onDeleteFile() {
+    if (!this.user?.profile_picture?.includes('default-avatar.jpg')) {
+      this.updateProfilePicture();
     }
   }
 }

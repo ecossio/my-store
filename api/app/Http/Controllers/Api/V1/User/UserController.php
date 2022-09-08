@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\V1\UserProfileResourse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends ApiController
 {
@@ -55,17 +56,17 @@ class UserController extends ApiController
     public function update(Request $request, User $user)
     {
         $rules = [
-            'first_name' => 'required|nullable|max:255',
-            'last_name' => 'required|nullable|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
         ];
 
         $this->validate($request, $rules);
 
-        if ($user->first_name != $request->input('first_name')) {
+        if ($request->has('first_name') && $request->filled('first_name') && $user->first_name != $request->input('first_name')) {
             $user->first_name = $request->input('first_name');
         }
 
-        if ($user->last_name != $request->input('last_name')) {
+        if ($request->has('last_name') && $request->filled('last_name') && $user->last_name != $request->input('last_name')) {
             $user->last_name = $request->input('last_name');
         }
 
@@ -152,5 +153,23 @@ class UserController extends ApiController
         }
 
         return $this->showMessage('Password updated');
+    }
+
+    public function updateProfilePicture(Request $request, User $user)
+    {
+        $rules = [
+            'profile_picture' => 'nullable|image|max:4096',
+        ];
+        $this->validate($request, $rules);
+
+        Storage::disk('profile_pictures')->delete($user->profile_picture);
+        if ($request->has('profile_picture') && $request->profile_picture->isValid()) {
+            $user->profile_picture = Storage::disk('profile_pictures')->put('/', $request->profile_picture);
+        } else {
+            $user->profile_picture = null;
+        }
+        $user->save();
+
+        return new UserProfileResourse($user);
     }
 }

@@ -78,6 +78,9 @@ export class AuthService {
         .pipe(
           tap((resp) => {
             const user = resp.data;
+            if (!user.profile_picture) {
+              user.profile_picture = '/assets/images/default-avatar.jpg';
+            }
             this.updateUserProfileLS(user);
           }),
           catchError((e: HttpErrorResponse) => {

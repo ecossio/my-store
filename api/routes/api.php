@@ -26,10 +26,14 @@ Route::get('products.categories', [ProductCategoryController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('auth/logout', [AuthController::class, 'logout']);
+
     Route::get('users/me', [UserController::class, 'me']);
-    Route::match(['put', 'patch'], 'users/{user}/update_profile', [UserController::class, 'update']);
-    Route::match(['put', 'patch'], 'users/{user}/update_password', [UserController::class, 'updatePassword']);
-    Route::match(['put', 'patch'], 'users/{user}/update_email', [UserController::class, 'updateEmail']);
+    Route::group(['prefix' => 'users/{user}'], function () {
+        Route::match(['put', 'patch'], 'update_profile', [UserController::class, 'update']);
+        Route::match(['put', 'patch'], 'update_password', [UserController::class, 'updatePassword']);
+        Route::match(['put', 'patch'], 'update_email', [UserController::class, 'updateEmail']);
+        Route::post('update_profile_picture', [UserController::class, 'updateProfilePicture']);
+    });
 
     Route::apiResource('products', ProductController::class, ['except' => ['index', 'show']]);
     Route::apiResource('wishlists', CustomerWishlistController::class, ['only' => ['index', 'store']]);
