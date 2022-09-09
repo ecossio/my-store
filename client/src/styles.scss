@@ -34,3 +34,11 @@ body {
     @apply w-4 h-4 mr-2.5 mt-0.5 text-white animate-spin;
   }
 }
+
+.bg-color-primary {
+  @apply bg-gray-800;
+}
+
+.tw-shadow-primary {
+  box-shadow: 0 3px 20px #0000000b;
+}

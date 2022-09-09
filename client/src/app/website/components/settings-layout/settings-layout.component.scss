@@ -1,3 +1,11 @@
+.h-full-screen {
+  height: calc(100vh - 5.877803557617943vh);
+}
+
+.my-bg-color-primary {
+  background-color: #f1f5f9;
+}
+
 .tab-link {
   @apply inline-block p-4 rounded-tl rounded-tr dark:hover:text-gray-700/75;
   &:hover {
