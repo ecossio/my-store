@@ -1,5 +1,17 @@
-.h-full-screen {
-  height: calc(100vh - 56px);
+.h-main-container {
+  min-height: calc(100vh - 56px);
+}
+
+.main-container {
+  @apply flex overflow-x-hidden mx-auto h-main-container bg-gray-800;
+}
+
+.sidebar {
+  @apply w-64 hidden md:block;
+}
+
+.content {
+  @apply rounded-xl pl-5 md:pl-0 pr-5 pb-5 w-full md:min-h-[90vh];
 }
 
 a.side-menu {
@@ -14,15 +26,11 @@ a.side-menu {
   }
 
   .badge {
-    @apply inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-[#70747a] dark:text-gray-300  z-0;
+    @apply inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-[#70747a] dark:text-gray-300 mr-5 z-0;
   }
 
   &.active {
     @apply bg-white text-gray-700 font-semibold z-[1];
-
-    .badge {
-      @apply mr-5;
-    }
 
     &::before {
       content: "";

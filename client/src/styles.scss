@@ -11,23 +11,66 @@ body {
   background: #fafafa;
 }
 
-.btn {
-  @apply border-2 p-2 bg-green-300 rounded-2xl hover:bg-green-700 transition disabled:opacity-25 disabled:pointer-events-none;
-}
+// .btn {
+//   @apply border-2 p-2 bg-green-300 rounded-2xl hover:bg-green-700 transition disabled:opacity-25 disabled:pointer-events-none;
+// }
 
-.button-primary {
-  @apply bg-gray-800/80 hover:bg-gray-800/90 px-6 py-2 rounded-md text-white font-medium tracking-wider transition;
-}
+// .button-primary {
+//   @apply bg-gray-800/80 hover:bg-gray-800/90 px-6 py-2 rounded-md text-white font-medium tracking-wider transition;
+// }
 
 .discount-percent {
   @apply bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white;
 }
 
-.tw-btn {
-  @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg text-sm disabled:cursor-default disabled:opacity-80;
+.btn {
+  @apply inline-flex items-center justify-center px-5 py-2 font-medium rounded-lg text-sm disabled:cursor-default disabled:opacity-50 text-indigo-100 hover:text-white disabled:hover:text-indigo-100 transition-colors;
 
-  &.tw-btn-primary {
-    @apply bg-[#6366f1] hover:bg-[#5155f5] hover:text-white text-indigo-100 disabled:hover:bg-[#6366f1] disabled:hover:text-indigo-100;
+  &.btn-sm {
+    @apply px-2;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    line-height: 1.25rem;
+    font-size: smaller;
+  }
+
+  &.btn-xs {
+    @apply px-1;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    line-height: 0.8rem;
+    font-size: smaller;
+  }
+
+  &.btn-rounded {
+    @apply rounded-full;
+  }
+
+  &.btn-primary {
+    @apply bg-[#6366f1] border-[#6366f1] hover:bg-[#5155f5] hover:border-[#5155f5] disabled:hover:bg-[#6366f1];
+
+    &.btn-outline {
+      @apply border bg-transparent text-indigo-700 hover:border-indigo-700 hover:text-indigo-700;
+    }
+  }
+
+  &.btn-secondary {
+    @apply text-gray-600/80 bg-[#e6e8eb]/75 hover:bg-[#e6e8eb]  disabled:hover:bg-[#6366f1];
+    &.btn-outline {
+      @apply border bg-transparent text-gray-600/80 hover:border-gray-600 hover:text-gray-600;
+    }
+  }
+
+  &.btn-danger {
+    @apply border-[#dc3545] bg-[#dc3545] hover:bg-[#c82333] hover:border-[#c82333];
+
+    &.btn-outline {
+      @apply bg-transparent border text-[#dc3545] hover:border-[#c82333] hover:text-[#c82333];
+    }
   }
 
   svg.loader {
@@ -41,4 +84,8 @@ body {
 
 .tw-shadow-primary {
   box-shadow: 0 3px 20px #0000000b;
+}
+
+.scale-effect {
+  @apply transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-200;
 }

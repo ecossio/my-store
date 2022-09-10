@@ -1,23 +1,35 @@
-.h-full-screen {
-  height: calc(100vh - 5.877803557617943vh);
+.settings-container {
+  @apply bg-white rounded-xl p-9 md:h-full;
 }
 
-.my-bg-color-primary {
-  background-color: #f1f5f9;
+.page-title {
+  @apply mb-10 text-3xl font-extrabold tracking-wide text-gray-900/75;
 }
 
-.tab-link {
-  @apply inline-block p-4 rounded-tl rounded-tr dark:hover:text-gray-700/75;
-  &:hover {
-    // background-color: #6366f1;
-    // border-bottom: solid #3d3f9b;
-    @apply border-b-2 border-b-gray-700/75;
+.tab-container {
+  @apply border-b mb-10;
+
+  .tabs {
+    @apply flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400;
+
+    li {
+      margin-right: 0.5rem;
+    }
   }
 
-  &.active {
-    color: #6366f1;
-    // background-color: #f8f4ff;
-    border-bottom: solid #6366f1;
-    @apply border-b-2 rounded-bl-none rounded-br-none;
+  .tab-link {
+    @apply inline-block p-4 rounded-tl rounded-tr dark:hover:text-gray-700/75;
+    &:hover {
+      // background-color: #6366f1;
+      // border-bottom: solid #3d3f9b;
+      @apply border-b-2 border-b-gray-700/75;
+    }
+
+    &.active {
+      color: #6366f1;
+      // background-color: #f8f4ff;
+      border-bottom: solid #6366f1;
+      @apply border-b-2 rounded-bl-none rounded-br-none;
+    }
   }
 }

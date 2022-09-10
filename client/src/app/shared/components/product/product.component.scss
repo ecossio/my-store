@@ -3,10 +3,6 @@
   @apply bg-white text-gray-700 w-64 min-h-[10rem] shadow-md overflow-hidden border-0 hover:shadow-xl cursor-pointer;
 }
 
-.scale-effect {
-  @apply transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-200
-}
-
 .badge {
   @apply px-3 py-1 rounded-full text-xs bg-gray-100;
 }
