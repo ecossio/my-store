@@ -1,0 +1,35 @@
+.product-item {
+  @apply flex gap-3;
+}
+
+.content {
+  @apply flex grow p-2;
+
+  .center {
+    @apply flex flex-col ;
+
+    .title {
+      @apply font-semibold text-lg sm:text-xl;
+    }
+  }
+
+  .right {
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-number-input {
+  @apply flex flex-col;
+  input:focus {
+    outline: none !important;
+  }
+}
+
+.custom-number-input button:focus {
+  outline: none !important;
+}
