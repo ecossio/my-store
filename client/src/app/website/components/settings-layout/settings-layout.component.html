@@ -1,31 +1,27 @@
-<div class="settings-container">
-  <div>
-    <h1 class="page-title">Settings</h1>
-
-    <div class="tab-container">
-      <ul class="tabs">
-        <li>
-          <a
-            routerLink="profile"
-            routerLinkActive="active"
-            class="tab-link"
-            aria-current="page"
-            >Profile</a
-          >
-        </li>
-        <li>
-          <a routerLink="email" routerLinkActive="active" class="tab-link"
-            >Email</a
-          >
-        </li>
-        <li>
-          <a routerLink="password" routerLinkActive="active" class="tab-link"
-            >Password</a
-          >
-        </li>
-      </ul>
-    </div>
-
-    <router-outlet></router-outlet>
+<app-page-content pageTitle="Settings">
+  <div class="tab-container">
+    <ul class="tabs">
+      <li>
+        <a
+          routerLink="profile"
+          routerLinkActive="active"
+          class="tab-link"
+          aria-current="page"
+          >Profile</a
+        >
+      </li>
+      <li>
+        <a routerLink="email" routerLinkActive="active" class="tab-link"
+          >Email</a
+        >
+      </li>
+      <li>
+        <a routerLink="password" routerLinkActive="active" class="tab-link"
+          >Password</a
+        >
+      </li>
+    </ul>
   </div>
-</div>
+
+  <router-outlet></router-outlet>
+</app-page-content>

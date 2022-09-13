@@ -10,6 +10,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { PageContentComponent } from './components/page-content/page-content.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { QuicklinkModule } from 'ngx-quicklink';
     ReversePipe,
     TimeAgoPipe,
     ClickOutsideDirective,
+    PageContentComponent,
   ],
   imports: [CommonModule, RouterModule, SwiperModule, QuicklinkModule],
   exports: [
@@ -29,6 +31,7 @@ import { QuicklinkModule } from 'ngx-quicklink';
     TimeAgoPipe,
     ClickOutsideDirective,
     QuicklinkModule,
+    PageContentComponent,
   ],
 })
 export class SharedModule {}

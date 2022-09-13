@@ -1,0 +1,7 @@
+.page-container {
+  @apply bg-white rounded-xl p-5 md:p-9 md:h-full;
+
+  .page-title {
+    @apply mb-10 text-3xl font-extrabold tracking-wide text-gray-900/75;
+  }
+}

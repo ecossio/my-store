@@ -18,7 +18,7 @@ export class StoreService {
     return this.myShoppingCart;
   }
 
-  addProduct(product: Product) {
+  addProduct(product: any) {
     this.myShoppingCart.push(product);
 
     // Comunicar los cambios del carrito

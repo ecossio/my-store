@@ -24,10 +24,9 @@ body {
 }
 
 .btn {
-  @apply inline-flex items-center justify-center px-5 py-2 font-medium rounded-lg text-sm disabled:cursor-default disabled:opacity-50 text-indigo-100 hover:text-white disabled:hover:text-indigo-100 transition-colors;
-
+  @apply text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center disabled:cursor-default disabled:opacity-50 hover:text-white disabled:hover:text-indigo-100 transition-colors focus:ring;
   &.btn-sm {
-    @apply px-2;
+    @apply px-2 focus:ring-2;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0.25rem;
@@ -37,13 +36,13 @@ body {
   }
 
   &.btn-xs {
-    @apply px-1;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    @apply px-1 focus:ring-2;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
     padding-top: 0.125rem;
     padding-bottom: 0.125rem;
     line-height: 0.8rem;
-    font-size: smaller;
+    font-size: 12px;
   }
 
   &.btn-rounded {
@@ -51,10 +50,10 @@ body {
   }
 
   &.btn-primary {
-    @apply bg-[#6366f1] border-[#6366f1] hover:bg-[#5155f5] hover:border-[#5155f5] disabled:hover:bg-[#6366f1];
+    @apply bg-[#5254ff] hover:bg-[#4649e7] active:bg-[#3033d4] disabled:hover:bg-[#6366f1] focus:ring-[#474be9]/50 dark:focus:ring-[#474be9]/50;
 
     &.btn-outline {
-      @apply border bg-transparent text-indigo-700 hover:border-indigo-700 hover:text-indigo-700;
+      @apply text-[#5254ff] bg-transparent border hover:bg-[#5254ff] hover:text-white active:bg-[#474be9];
     }
   }
 
@@ -88,4 +87,8 @@ body {
 
 .scale-effect {
   @apply transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-200;
+}
+
+.on-active-scale-effect {
+  @apply transition ease-in-out active:-translate-y-1 active:scale-110 duration-150;
 }

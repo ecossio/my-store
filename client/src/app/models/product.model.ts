@@ -13,10 +13,10 @@ export interface Product {
   id: number;
   name: string;
   description: string;
-  categories: Category[];
   price: number;
   images: string[];
   rating: Rating;
+  categories: Category[];
 }
 
 export interface CreateProductDTO
@@ -25,3 +25,7 @@ export interface CreateProductDTO
 }
 
 export interface UpdateProductDTO extends Partial<CreateProductDTO> {}
+
+export interface WishlistedProduct extends Omit<Product, 'categories' | 'images'> {
+  added_at: string;
+}

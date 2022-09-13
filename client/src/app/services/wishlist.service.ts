@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, catchError, switchMap, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { Product } from '../models/product.model';
+import { WishlistedProduct } from '../models/product.model';
 import { ApiResponse } from '../models/api-response.model';
 import { LocalStorageService } from './local-storage.service';
 import { LS_DATA_KEY } from './token.service';
@@ -12,11 +12,11 @@ import { LS_DATA_KEY } from './token.service';
   providedIn: 'root',
 })
 export class WishlistService {
-  private myWishlist: Product[] = [];
+  private myWishlist: WishlistedProduct[] = [];
   private totalWishes: number = 0;
 
   // Patron Observable para el carrito de compras
-  private myWishes = new BehaviorSubject<Product[]>([]);
+  private myWishes = new BehaviorSubject<WishlistedProduct[]>([]);
   myWishes$ = this.myWishes.asObservable();
 
   private myTotalWishes = new BehaviorSubject<number>(0);
@@ -31,7 +31,7 @@ export class WishlistService {
   ) {}
 
   getWishes() {
-    return this.http.get<ApiResponse<Product[]>>(this.apiUrl).pipe(
+    return this.http.get<ApiResponse<WishlistedProduct[]>>(this.apiUrl).pipe(
       tap((resp) => {
         this.init(resp.data);
         this.updateWishlistStorage();
@@ -41,7 +41,7 @@ export class WishlistService {
 
   addWish(id: number) {
     return this.http
-      .post<ApiResponse<Product>>(this.apiUrl, { product_id: id })
+      .post<ApiResponse<WishlistedProduct>>(this.apiUrl, { product_id: id })
       .pipe(
         tap((resp) => {
           const item = resp.data;
@@ -69,7 +69,7 @@ export class WishlistService {
   }
 
   deleteWish(id: number) {
-    return this.http.delete<ApiResponse<Product>>(`${this.apiUrl}/${id}`).pipe(
+    return this.http.delete<ApiResponse<WishlistedProduct>>(`${this.apiUrl}/${id}`).pipe(
       tap(() => {
         const productIdx = this.myWishlist.findIndex((i) => i.id == id);
         this.myWishlist.splice(productIdx, 0);
@@ -84,7 +84,7 @@ export class WishlistService {
     );
   }
 
-  init(items: Product[]) {
+  init(items: WishlistedProduct[]) {
     this.myWishlist = items;
     this.totalWishes = items.length;
 

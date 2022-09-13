@@ -1,4 +1,4 @@
-import { Product } from './product.model';
+import { Product, WishlistedProduct } from './product.model';
 
 export interface Credentials {
   email: string;
@@ -7,7 +7,7 @@ export interface Credentials {
 
 export interface Wishlist {
   total_wishes: number;
-  items: Product[];
+  items: WishlistedProduct[];
 }
 
 export interface User {

@@ -20,6 +20,7 @@ class ItemWishlistResource extends JsonResource
             "name" => $product->name,
             "description" => $product->description,
             "price" => (float)$product->price,
+            'added_at' => $this->created_at->format('Y-m-d'),
             "images" => ["https://source.unsplash.com/random"]
         ];
     }

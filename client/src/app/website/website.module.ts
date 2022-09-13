@@ -18,6 +18,8 @@ import { AccountLayoutComponent } from './components/account-layout/account-layo
 import { SettingsLayoutComponent } from './components/settings-layout/settings-layout.component';
 import { EmailComponent } from './pages/account/settings/email/email.component';
 import { PasswordComponent } from './pages/account/settings/password/password.component';
+import { WishItemComponent } from './components/wish-item/wish-item.component';
+import { WishItemSkeletonLoaderComponent } from './components/wish-item-skeleton-loader/wish-item-skeleton-loader.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { PasswordComponent } from './pages/account/settings/password/password.co
     SettingsLayoutComponent,
     EmailComponent,
     PasswordComponent,
+    WishItemComponent,
+    WishItemSkeletonLoaderComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, WebsiteRoutingModule, SharedModule, SwiperModule],
 })

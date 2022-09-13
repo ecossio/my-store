@@ -1,0 +1,68 @@
+.wlp-card {
+  @apply rounded-md shadow transition-shadow shadow-slate-900/10 md:hover:shadow-md flex md:flex-nowrap gap-4 md:gap-6 bg-slate-300/20 text-gray-700;
+
+  .thumbnail {
+    @apply flex flex-col justify-center bg-[#f6f6f6] rounded-tl-md rounded-bl-md;
+    img {
+      @apply object-cover min-w-[108px] max-w-[108px] rounded-tl-md rounded-bl-md;
+    }
+  }
+
+  .content {
+    @apply flex flex-wrap flex-grow gap-4 pt-[4px] pb-3 pr-3;
+
+    .header {
+      @apply flex flex-col flex-1;
+
+      .title {
+        @apply font-semibold text-lg sm:text-xl;
+      }
+
+      .rating {
+        @apply flex items-center mb-2;
+      }
+    }
+
+    .badge {
+      @apply px-3 py-1 rounded-full text-xs bg-gray-100 mb-1 whitespace-nowrap;
+
+      &.available {
+        @apply bg-green-400 text-white;
+      }
+
+      &.unavailable {
+        @apply bg-red-500 text-white;
+      }
+    }
+
+    .center {
+      @apply justify-between grow;
+
+      .price-data {
+        @apply flex gap-1 justify-end md:justify-start;
+
+        .price {
+          @apply flex flex-col self-end w-full;
+
+          .og-price {
+            @apply text-xs md:text-sm line-through leading-3 opacity-75;
+          }
+
+          .final-price {
+            @apply md:text-lg font-bold;
+          }
+          .discount-percent {
+            @apply bg-gray-800/90 px-1.5 py-0.5 rounded-md text-sm font-semibold leading-7 text-white mt-4;
+          }
+        }
+      }
+    }
+
+    .right {
+      @apply flex flex-col sm:flex-shrink w-full sm:w-auto self-end lg:h-full lg:justify-between;
+      .actions {
+        @apply flex flex-nowrap justify-end;
+      }
+    }
+  }
+}
