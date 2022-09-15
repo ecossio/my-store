@@ -18,10 +18,10 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description', 1000);
-            $table->integer('quantity')->unsigned();
-            $table->decimal('price', 15, 2);
+            $table->integer('stock')->unsigned();
+            $table->decimal('unit_price', 15, 2);
             $table->string('status')->default(Product::PRODUCT_NOT_AVAILABLE);
-            $table->string('image');
+            $table->string('thumbnail');
             $table->timestamps();
             $table->softDeletes();
         });

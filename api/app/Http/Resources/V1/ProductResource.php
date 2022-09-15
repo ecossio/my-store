@@ -18,11 +18,11 @@ class ProductResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "description" => $this->description,
-            "quantity" => (int)$this->quantity,
-            "price" => (double)$this->price,
+            "stock" => (int)$this->stock,
+            "price" => (float)$this->price,
             "status" => $this->status,
             "categories" => CategoryResource::collection($this->categories),
-            "images" => ["https://source.unsplash.com/random"]
+            "images" => [$this->thumbnail]
         ];
     }
 }

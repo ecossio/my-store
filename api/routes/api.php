@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\Cart\CartController;
+use App\Http\Controllers\Api\V1\Cart\CartItemController;
 use App\Http\Controllers\Api\V1\User\UserController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use App\Http\Controllers\Api\V1\Category\CategoryController;
@@ -37,5 +39,17 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::apiResource('products', ProductController::class, ['except' => ['index', 'show']]);
     Route::apiResource('wishlists', CustomerWishlistController::class, ['only' => ['index', 'store']]);
-    Route::delete('wishlists/{product}', [CustomerWishlistController::class, 'destroy']);
+    Route::delete('wishlists/{id}', [CustomerWishlistController::class, 'destroy']);
+
+    Route::group(['prefix' => 'carts'], function () {
+        Route::post('', [CartController::class, 'store'])->name('cart.store');
+        Route::get('{cart}', [CartController::class, 'show'])->name('cart.show');
+        Route::put('{cart}', [CartController::class, 'update'])->name('cart.update');
+        Route::delete('{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+        Route::post('{cart}/items', [CartItemController::class, 'store'])->name('cart.items.store');
+        Route::put('{cart}/items/{item}', [CartItemController::class, 'update'])->name('cart.items.update');
+        Route::delete('{cart}/items/{item}', [CartItemController::class, 'destroy'])->name('cart.items.destroy');
+        // Route::post('{cart}/discount', [CheckoutDiscountController::class, 'store'])->name('cart.discount');
+    });
 });
