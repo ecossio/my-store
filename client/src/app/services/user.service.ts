@@ -9,8 +9,9 @@ import {
   UpdateUserEmailDTO,
 } from '../models/user.model';
 import { ApiResponse } from '../models/api-response.model';
-import { map, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
 import { AuthService } from './auth.service';
+import { isPublicEndpoint } from '../interceptors/token.interceptor';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,13 @@ export class UserService {
   constructor(private http: HttpClient, private authSrv: AuthService) {}
 
   create(dto: CreateUserDTO) {
-    return this.http.post<User>(this.apiUrl, dto);
+    return this.authSrv.getCSRFCookie().pipe(
+      switchMap(() => {
+        return this.http.post(`${environment.API_URL}/api/auth/register`, dto, {
+          context: isPublicEndpoint(),
+        });
+      })
+    );
   }
 
   getAll() {

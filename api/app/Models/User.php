@@ -52,6 +52,18 @@ class User extends Authenticatable
     ];
 
     /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $redirect_url = request()->input('redirect_url');
+        $this->notify(new \App\Notifications\MailResetPasswordNotification($token, $redirect_url));
+    }
+
+    /**
      * Mutators
      */
     public function setFirstNameAttribute($valor)

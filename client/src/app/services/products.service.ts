@@ -36,10 +36,6 @@ export class ProductsService {
       params = params.set('offset', offset);
     }
 
-    /**
-     * Podemos habilitar o deshabilitar un interceptor de acuerdo a un contexto (context),
-     * de esta forma podemos decidir especificamente a que peticiones se aplica el interceptor
-     */
     return this.http
       .get<Product[]>(`${this.apiUrl}/categories/${categoryId}/products`, {
         params,

@@ -8,6 +8,7 @@ import {
 } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-menu',
@@ -42,6 +43,7 @@ export class ProfileMenuComponent implements OnInit {
   totalWishes: number = 0;
 
   constructor(
+    private router: Router,
     private authSrv: AuthService,
     private wishlistSrv: WishlistService
   ) {}
@@ -67,6 +69,10 @@ export class ProfileMenuComponent implements OnInit {
   }
 
   SignOut(): void {
-    this.authSrv.logout();
+    this.authSrv.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+    });
   }
 }

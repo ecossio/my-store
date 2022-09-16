@@ -21,7 +21,10 @@ export interface User {
   wishlist?: Wishlist;
 }
 
-export interface CreateUserDTO extends Omit<User, 'id'> {}
+export interface CreateUserDTO
+  extends Omit<User, 'id' | 'profile_picture' | 'wishlist' | 'role'> {
+  password_confirmation: string;
+}
 
 export interface UpdateUserProfileDTO {
   first_name?: string;

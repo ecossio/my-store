@@ -1,0 +1,82 @@
+<section>
+  <div class="page-container">
+    <a routerLink="/home" class="app-name" [class.disabled]="isLoading">
+      <img
+        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+        alt="Workflow"
+      />
+      MyStore
+    </a>
+    <div class="form-container" [class.disabled]="isLoading">
+      <div class="content">
+        <h1 class="title">Forgot your password?</h1>
+        <p class="description">
+          Don't fret! Just type in your email and we will send you a reset link!
+        </p>
+        <form
+          class="form"
+          [formGroup]="form"
+          #fForm="ngForm"
+          (ngSubmit)="submit()"
+        >
+          <div class="form-input">
+            <label for="email">Your email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="name@company.com"
+              formControlName="email"
+            />
+            <ng-container
+              *ngIf="
+                fForm.submitted &&
+                frm['email'].invalid &&
+                (frm['email'].dirty || frm['email'].touched)
+              "
+            >
+              <app-ip-error *ngIf="frm['email'].hasError('required')">
+                The email field is required.
+              </app-ip-error>
+              <app-ip-error
+                *ngIf="
+                  frm['email'].hasError('pattern') ||
+                  frm['email'].hasError('email')
+                "
+              >
+                Wrong email format
+              </app-ip-error>
+            </ng-container>
+            <app-ip-error *ngFor="let err of formErrors.email">
+              {{ err }}
+            </app-ip-error>
+          </div>
+          <button type="submit" class="btn-primary" [disabled]="isLoading">
+            <svg
+              *ngIf="isLoading"
+              class="loader"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            {{ btnText }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

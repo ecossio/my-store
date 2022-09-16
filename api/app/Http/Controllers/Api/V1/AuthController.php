@@ -5,23 +5,21 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
 
-class AuthController extends Controller
+class AuthController extends ApiController
 {
     public function login(Request $request)
     {
         $this->validateLogin($request);
         if (Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
+            return $this->successResponse([
                 'access_token' => $request->user()->createToken($request->email)->plainTextToken,
                 'message' => 'success'
             ], Response::HTTP_OK);
         }
 
-        return response()->json([
-            'message' => 'Credenciales incorrectas'
-        ], Response::HTTP_UNAUTHORIZED);
+        return $this->errorResponse('Credenciales incorrectas', Response::HTTP_FORBIDDEN);
     }
 
     public function logout(Request $request)

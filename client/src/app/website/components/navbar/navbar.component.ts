@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../../services/store.service';
+import { ShopingCartService } from '../../../services/shoping-cart.service';
 import {
   trigger,
   state,
@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
   counter = 0;
 
   constructor(
-    private storeService: StoreService,
+    private storeService: ShopingCartService,
     private categorySrv: CategoryService,
     private authSrv: AuthService
   ) {}

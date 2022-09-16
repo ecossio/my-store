@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WishlistedProduct } from 'src/app/models/product.model';
-import { StoreService } from 'src/app/services/store.service';
+import { ShopingCartService } from 'src/app/services/shoping-cart.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
-import { Product } from 'src/app/models/product.model';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class WishlistComponent implements OnInit {
   constructor(
     private snakbarSrv: SnackbarService,
     private wishlistSrv: WishlistService,
-    private storeSrv: StoreService
+    private storeSrv: ShopingCartService
   ) {}
 
   ngOnInit(): void {

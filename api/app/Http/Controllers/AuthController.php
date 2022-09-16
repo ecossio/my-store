@@ -26,9 +26,9 @@ class AuthController extends Controller
         }
 
         if ($request->expectsJson()) {
-            return new JsonResponse(['message' => 'Credenciales incorrectas'], Response::HTTP_UNAUTHORIZED);
+            return new JsonResponse(['message' => 'Credenciales incorrectas'], Response::HTTP_FORBIDDEN);
         }
-        return new Response(['message' => 'Credenciales incorrectas'], Response::HTTP_UNAUTHORIZED);
+        return new Response(['message' => 'Credenciales incorrectas'], Response::HTTP_FORBIDDEN);
     }
 
     public function logout(Request $request)

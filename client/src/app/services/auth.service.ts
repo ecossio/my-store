@@ -6,13 +6,13 @@ import {
 } from '@angular/common/http';
 import { Auth } from '../models/auth.model';
 import { Credentials, User } from '../models/user.model';
+import { ApiResponse } from '../models/api-response.model';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { TokenService, LS_DATA_KEY } from './token.service';
 import { LocalStorageService } from './local-storage.service';
 import { environment } from './../../environments/environment';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { ApiResponse } from '../models/api-response.model';
-import { Router } from '@angular/router';
+import { isPublicEndpoint } from '../interceptors/token.interceptor';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +26,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private tokenSrv: TokenService,
-    private lsSrv: LocalStorageService,
-    private router: Router
+    private lsSrv: LocalStorageService
   ) {}
 
   getCSRFCookie() {
@@ -51,7 +50,7 @@ export class AuthService {
           case HttpStatusCode.InternalServerError:
             message = 'Error interno del servidor';
             break;
-          case HttpStatusCode.Unauthorized:
+          case HttpStatusCode.Forbidden:
             message = 'Credenciales incorrectas';
             break;
           default:
@@ -104,25 +103,47 @@ export class AuthService {
   }
 
   logout() {
-    this.http
-      .post(`${this.apiUrl}/sanctum/logout`, {})
-      .pipe(
-        tap(() => {
-          this.tokenSrv.remove();
-          this.user.next(null);
-          this.router.navigate(['/home']);
-        }),
-        catchError((error: HttpErrorResponse) => {
-          this.tokenSrv.remove();
-          this.user.next(null);
-          return throwError(() => error);
-        })
-      )
-      .subscribe();
+    return this.http.post(`${this.apiUrl}/sanctum/logout`, {}).pipe(
+      tap(() => {
+        this.tokenSrv.remove();
+        this.user.next(null);
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.tokenSrv.remove();
+        this.user.next(null);
+        return throwError(() => error);
+      })
+    );
   }
 
   isAuth() {
     return this.lsSrv.existsAndHasProperty(LS_DATA_KEY, 'user') ? true : false;
+  }
+
+  forgotPassword(params: any) {
+    // return this.http.post(`${this.apiUrl}/api/auth/password-forgot`, { email }, {});
+
+    return this.getCSRFCookie().pipe(
+      switchMap(() => {
+        return this.http.post(
+          `${this.apiUrl}/api/auth/password-forgot`,
+          params,
+          {
+            context: isPublicEndpoint(),
+          }
+        );
+      })
+    );
+  }
+
+  resetPassword(params: any) {
+    return this.getCSRFCookie().pipe(
+      switchMap(() => {
+        return this.http.put(`${this.apiUrl}/api/auth/password-reset`, params, {
+          context: isPublicEndpoint(),
+        });
+      })
+    );
   }
 
   /**

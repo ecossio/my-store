@@ -78,7 +78,7 @@ export class PasswordComponent implements OnInit {
           this.isUpdating = false;
           if (e.status == 500) {
             this.snackbarSrv.showErrorToast(e.error.message);
-          } else if (e.status == 401) {
+          } else if (e.status == 403) {
             this.snackbarSrv.showErrorToast(e.error.message);
           }
         },

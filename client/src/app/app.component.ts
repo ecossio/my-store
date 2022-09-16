@@ -49,17 +49,17 @@ export class AppComponent implements OnInit {
   }
 
   createUser() {
-    this.userSrv
-      .create({
-        first_name: 'José',
-        last_name: 'Lopez',
-        email: 'jose@mail.com',
-        password: '12345',
-        role: 'customer',
-      })
-      .subscribe((data) => {
-        console.log(data);
-      });
+    // this.userSrv
+    //   .create({
+    //     first_name: 'José',
+    //     last_name: 'Lopez',
+    //     email: 'jose@mail.com',
+    //     password: '12345',
+    //     role: 'customer',
+    //   })
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
   }
 
   login() {

@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { NoAuthGuard } from '../guards/no-auth.guard';
+import { ForgotComponent } from './pages/forgot/forgot.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'register',
         // canDeactivate: [ExitGuard],
         component: RegisterComponent,
+      },
+      {
+        path: 'forgot',
+        component: ForgotComponent,
       },
       {
         path: 'recovery',

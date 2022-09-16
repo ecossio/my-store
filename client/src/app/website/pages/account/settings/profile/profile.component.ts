@@ -70,6 +70,9 @@ export class ProfileComponent implements OnInit {
     // const params: UpdateUserProfileDTO = this.form.value;
     const user_id = this.user?.id ? this.user?.id : 0;
     this.userSrv.updateProfile(user_id, dto).subscribe({
+      next: () => {
+        this.snackbarSrv.showSuccessToast('Profile updated');
+      },
       error: (e) => {
         this.isUpdating = false;
         if (e.status == 500) {
@@ -78,7 +81,6 @@ export class ProfileComponent implements OnInit {
       },
       complete: () => {
         this.isUpdating = false;
-        this.snackbarSrv.showSuccessToast('Perfil actualizado');
       },
     });
   }

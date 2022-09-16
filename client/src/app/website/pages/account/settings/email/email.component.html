@@ -24,20 +24,16 @@
           (frm['email'].dirty || frm['email'].touched)
         "
       >
-        <p
-          class="text-red-500 text-xs italic"
-          *ngIf="frm['email'].hasError('required')"
-        >
+        <app-ip-error *ngIf="frm['email'].hasError('required')">
           Campo requerido
-        </p>
-        <p
-          class="text-red-500 text-xs italic"
+        </app-ip-error>
+        <app-ip-error
           *ngIf="
             frm['email'].hasError('pattern') || frm['email'].hasError('email')
           "
         >
           Formato de email incorrecto
-        </p>
+        </app-ip-error>
       </ng-container>
     </div>
   </div>
@@ -62,24 +58,20 @@
           (frm['email_confirmation'].dirty || frm['email_confirmation'].touched)
         "
       >
-        <p
-          class="text-red-500 text-xs italic"
-          *ngIf="frm['email_confirmation'].hasError('required')"
-        >
+        <app-ip-error *ngIf="frm['email_confirmation'].hasError('required')">
           Campo requerido
-        </p>
-        <p
-          class="text-red-500 text-xs italic"
+        </app-ip-error>
+        <app-ip-error
           *ngIf="
             frm['email_confirmation'].hasError('pattern') ||
             frm['email_confirmation'].hasError('email')
           "
         >
           Formato de email incorrecto
-        </p>
-        <p class="text-red-500 text-xs italic" *ngIf="emailMatchError">
+        </app-ip-error>
+        <app-ip-error *ngIf="emailMatchError">
           Los correos electrónicos no coinciden
-        </p>
+        </app-ip-error>
       </ng-container>
     </div>
   </div>
@@ -96,8 +88,7 @@
         maxlength="200"
         autocomplete="off"
       />
-      <p
-        class="text-red-500 text-xs italic"
+      <app-ip-error
         *ngIf="
           Form.submitted &&
           frm['password'].hasError('required') &&
@@ -105,7 +96,7 @@
         "
       >
         Campo requerido
-      </p>
+      </app-ip-error>
     </div>
   </div>
 

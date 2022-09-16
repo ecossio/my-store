@@ -7,7 +7,7 @@ import {
   Product,
   UpdateProductDTO,
 } from 'src/app/models/product.model';
-import { StoreService } from '../../../services/store.service';
+import { ShopingCartService } from '../../../services/shoping-cart.service';
 import { ProductsService } from '../../../services/products.service';
 import Swiper, { Lazy, Navigation, Pagination } from 'swiper';
 
@@ -46,7 +46,7 @@ export class ProductsComponent implements OnInit {
   };
 
   constructor(
-    private storeService: StoreService,
+    private storeService: ShopingCartService,
     private productsSrv: ProductsService
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();

@@ -123,7 +123,7 @@ class UserController extends ApiController
             $user->email = $request->input('email');
             $user->save();
         } else {
-            return $this->errorResponse('Password incorrect', 401);
+            return $this->errorResponse('Password incorrect', Response::HTTP_FORBIDDEN);
         }
 
         return new UserProfileResourse($user);
@@ -149,7 +149,7 @@ class UserController extends ApiController
             $user->password = bcrypt($request->password);
             $user->save();
         } else {
-            return $this->errorResponse('Current password is incorrect', 401);
+            return $this->errorResponse('Current password is incorrect', Response::HTTP_FORBIDDEN);
         }
 
         return $this->showMessage('Password updated');

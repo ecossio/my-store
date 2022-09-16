@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Product\ProductController;
 use App\Http\Controllers\Api\V1\Category\CategoryController;
 use App\Http\Controllers\Api\V1\Customer\CustomerWishlistController;
 use App\Http\Controllers\Api\V1\Product\ProductCategoryController;
+use App\Http\Controllers\Api\V1\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ use App\Http\Controllers\Api\V1\Product\ProductCategoryController;
 */
 
 Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/register', [RegisterController::class, 'store']);
+Route::name('auth.password.forgot')->post('auth/password-forgot', 'App\Http\Controllers\Api\V1\ForgotPasswordController@forgot');
+Route::name('auth.password.reset')->put('auth/password-reset', 'App\Http\Controllers\Api\V1\ResetPasswordController@doReset');
+
 Route::get('categories', [CategoryController::class, 'index']);
 Route::apiResource('products', ProductController::class, ['only' => ['index', 'show']]);
 Route::get('products.categories', [ProductCategoryController::class, 'index']);

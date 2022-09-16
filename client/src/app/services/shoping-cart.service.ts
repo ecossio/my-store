@@ -5,7 +5,7 @@ import { Product } from '../models/product.model';
 @Injectable({
   providedIn: 'root',
 })
-export class StoreService {
+export class ShopingCartService {
   private myShoppingCart: Product[] = [];
 
   // Patron Observable para el carrito de compras

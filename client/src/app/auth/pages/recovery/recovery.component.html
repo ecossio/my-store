@@ -1,1 +1,131 @@
-<p>recovery works!</p>
+<section>
+  <div class="page-container">
+    <a routerLink="/home" class="app-name" [class.disabled]="isLoading">
+      <img
+        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+        alt="Workflow"
+      />
+      MyStore
+    </a>
+    <div class="form-container" [class.disabled]="isLoading">
+      <div class="content">
+        <h2 class="title">Change Password</h2>
+        <form [formGroup]="form" #fForm="ngForm" (ngSubmit)="submit()">
+          <div class="form-input">
+            <label for="password">New Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="••••••••"
+              formControlName="password"
+            />
+            <ng-container
+              *ngIf="
+                fForm.submitted &&
+                frm['password'].invalid &&
+                (frm['password'].dirty || frm['password'].touched)
+              "
+            >
+              <app-ip-error *ngIf="frm['password'].hasError('required')">
+                The new password field is required.
+              </app-ip-error>
+              <app-ip-error *ngIf="frm['password'].hasError('minlength')">
+                The password must be at least 8 digits
+              </app-ip-error>
+            </ng-container>
+            <app-ip-error *ngFor="let err of formErrors.password">
+              {{ err }}
+            </app-ip-error>
+          </div>
+          <div class="form-input">
+            <label for="confirm-password">Confirm password</label>
+            <input
+              type="text"
+              name="confirm-password"
+              id="confirm-password"
+              placeholder="••••••••"
+              formControlName="password_confirmation"
+            />
+            <ng-container
+              *ngIf="
+                fForm.submitted &&
+                (frm['password_confirmation'].hasError('required') ||
+                  passwordMatchError)
+              "
+            >
+              <app-ip-error
+                *ngIf="
+                  frm['password_confirmation'].hasError('required') &&
+                  (frm['password_confirmation'].dirty ||
+                    frm['password_confirmation'].touched)
+                "
+              >
+                This confirm password field is required
+              </app-ip-error>
+              <app-ip-error
+                *ngIf="
+                  !frm['password_confirmation'].hasError('required') &&
+                  passwordMatchError &&
+                  (frm['password_confirmation'].dirty ||
+                    frm['password_confirmation'].touched)
+                "
+              >
+                Passwords do not match
+              </app-ip-error>
+            </ng-container>
+            <app-ip-error *ngFor="let err of formErrors.password_confirmation">
+              {{ err }}
+            </app-ip-error>
+          </div>
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="newsletter"
+                aria-describedby="newsletter"
+                type="checkbox"
+                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <label
+                for="newsletter"
+                class="font-light text-gray-500 dark:text-gray-300"
+                >I accept the
+                <a
+                  class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  href="javascript:"
+                  >Terms and Conditions</a
+                ></label
+              >
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" [disabled]="isLoading">
+            <svg
+              *ngIf="isLoading"
+              class="loader"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            {{ btnText }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -11,6 +11,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { PageContentComponent } from './components/page-content/page-content.component';
+import { IpErrorComponent } from './components/ip-error/ip-error.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PageContentComponent } from './components/page-content/page-content.com
     TimeAgoPipe,
     ClickOutsideDirective,
     PageContentComponent,
+    IpErrorComponent,
   ],
   imports: [CommonModule, RouterModule, SwiperModule, QuicklinkModule],
   exports: [
@@ -32,6 +34,7 @@ import { PageContentComponent } from './components/page-content/page-content.com
     ClickOutsideDirective,
     QuicklinkModule,
     PageContentComponent,
+    IpErrorComponent,
   ],
 })
 export class SharedModule {}

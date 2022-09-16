@@ -9,6 +9,7 @@ import { RecoveryComponent } from './pages/recovery/recovery.component';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ForgotComponent } from './pages/forgot/forgot.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SharedModule } from '../shared/shared.module';
     LoginComponent,
     RegisterComponent,
     RecoveryComponent,
+    ForgotComponent,
   ],
-  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, SharedModule],
 })
 export class AuthModule {}
